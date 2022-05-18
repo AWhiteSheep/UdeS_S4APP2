@@ -77,47 +77,45 @@ BEGIN
     end process;
     
     process(fsm_EtatCourant, d_strobe_btn)
-    begin
-    
-         
-            case (fsm_EtatCourant) is
-              when sta_s1 =>
-                    
-                 if d_strobe_btn(0) = '1' then -- incremente
-                    fsm_prochainEtat <= sta_s2;
-                 elsif d_strobe_btn(1) = '1' then
-                     fsm_prochainEtat <= sta_s4;    
-                 else
-                    fsm_prochainEtat <= fsm_EtatCourant;
-                 end if;
-                 
-              when sta_s2 =>
-                 if d_strobe_btn(0) = '1' then -- incremente
-                    fsm_prochainEtat <= sta_s3;
-                 elsif d_strobe_btn(1) = '1' then
-                     fsm_prochainEtat <= sta_s1;
-                 else
-                    fsm_prochainEtat <= fsm_EtatCourant;
-                 end if;
-              
-              when sta_s3 =>
-                 if d_strobe_btn(0) = '1' then -- incremente
-                    fsm_prochainEtat <= sta_s4;
-                 elsif d_strobe_btn(1) = '1' then
-                     fsm_prochainEtat <= sta_s2;
-                 else
-                    fsm_prochainEtat <= fsm_EtatCourant;
-                 end if;
-                 
-              when sta_s4 =>
-                 if d_strobe_btn(0) = '1' then -- incremente
-                    fsm_prochainEtat <= sta_s1;
-                 elsif d_strobe_btn(1) = '1' then
-                     fsm_prochainEtat <= sta_s3;
-                 else
-                    fsm_prochainEtat <= fsm_EtatCourant;
-                 end if;                 
-            end case;
+    begin         
+        case (fsm_EtatCourant) is
+          when sta_s1 =>
+                
+             if d_strobe_btn(0) = '1' then -- incremente
+                fsm_prochainEtat <= sta_s2;
+             elsif d_strobe_btn(1) = '1' then
+                 fsm_prochainEtat <= sta_s4;    
+             else
+                fsm_prochainEtat <= fsm_EtatCourant;
+             end if;
+             
+          when sta_s2 =>
+             if d_strobe_btn(0) = '1' then -- incremente
+                fsm_prochainEtat <= sta_s3;
+             elsif d_strobe_btn(1) = '1' then
+                 fsm_prochainEtat <= sta_s1;
+             else
+                fsm_prochainEtat <= fsm_EtatCourant;
+             end if;
+          
+          when sta_s3 =>
+             if d_strobe_btn(0) = '1' then -- incremente
+                fsm_prochainEtat <= sta_s4;
+             elsif d_strobe_btn(1) = '1' then
+                 fsm_prochainEtat <= sta_s2;
+             else
+                fsm_prochainEtat <= fsm_EtatCourant;
+             end if;
+             
+          when sta_s4 =>
+             if d_strobe_btn(0) = '1' then -- incremente
+                fsm_prochainEtat <= sta_s1;
+             elsif d_strobe_btn(1) = '1' then
+                 fsm_prochainEtat <= sta_s3;
+             else
+                fsm_prochainEtat <= fsm_EtatCourant;
+             end if;                 
+        end case;
     end process;
     
     
