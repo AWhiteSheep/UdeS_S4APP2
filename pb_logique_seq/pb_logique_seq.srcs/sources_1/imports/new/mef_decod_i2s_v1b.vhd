@@ -52,10 +52,12 @@ end mef_decod_i2s_v1b;
 architecture Behavioral of mef_decod_i2s_v1b is
     
    type fsm_decI2S_etats is (
-         sta_s1,
-         sta_s2,
-         sta_s3,
-         sta_s4
+         sta_init,
+         sta_to_g,
+         sta_fin_g,
+         sta_to_d,
+         sta_fin_d,
+         sta_fin
      ); 
        
    signal fsm_EtatCourant, fsm_prochainEtat : fsm_decI2S_etats;
@@ -69,9 +71,11 @@ begin
     process(i_bclk, i_reset)
     begin
        if (i_reset ='1') then
-             fsm_EtatCourant <= sta_s1;
+             fsm_EtatCourant <= sta_init;
        else
-       if rising_edge(i_bclk) then
+       if falling_edge(i_bclk) and (fsm_EtatCourant = sta_to_g) then
+             fsm_EtatCourant <= fsm_prochainEtat;
+       elsif rising_edge(i_bclk) and (fsm_EtatCourant = sta_to_d) then
              fsm_EtatCourant <= fsm_prochainEtat;
        end if;
        end if;
@@ -85,13 +89,90 @@ begin
    end if;
    end process;
    
+   
   -- synch compteur codeur
    rest_cpt: process (i_lrc, d_reclrc_prec, i_reset)
       begin
          o_cpt_bit_reset <= (d_reclrc_prec xor i_lrc) or i_reset;
       end process;
       
-
+    process(fsm_EtatCourant, i_lrc, i_cpt_bits)
+    begin         
+        case (fsm_EtatCourant) is          
+          when sta_init =>
+            fsm_EtatCourant <= sta_to_g;
+          when sta_to_g =>
+            if (i_cpt_bits = "11000") then
+                fsm_EtatCourant <= sta_fin_g;
+            else
+                fsm_EtatCourant <= sta_to_g;
+            end if;
+          when sta_fin_g =>
+            fsm_EtatCourant <= sta_to_d;
+          when sta_to_d =>
+            if (i_cpt_bits = "11000") then
+                fsm_EtatCourant <= sta_fin_d;
+            else
+                fsm_EtatCourant <= sta_to_d;
+            end if;
+          when sta_fin_d =>
+            fsm_EtatCourant <= sta_fin;
+        when sta_fin =>
+            fsm_EtatCourant <= sta_init;
+        when others =>     
+            fsm_EtatCourant <= sta_init;
+        end case;
+    end process;
+    
+    
+    process(fsm_EtatCourant, i_lrc)
+    begin    
+        case (fsm_EtatCourant) is
+          when sta_init =>
+             o_bit_enable     <= '0';
+             o_load_left      <= '0';
+             o_load_right     <= '0';
+             o_str_dat        <= '0';           
+             o_cpt_bit_reset  <= '0';
+          when sta_to_g =>
+             o_bit_enable     <= '1';
+             o_load_left      <= '1';
+             o_load_right     <= '0';
+             o_str_dat        <= '0';           
+             o_cpt_bit_reset  <= '0';     
+          when sta_fin_g =>
+             o_bit_enable     <= '0';
+             o_load_left      <= '0';
+             o_load_right     <= '0';
+             o_str_dat        <= '0';   
+             o_cpt_bit_reset  <= '1';
+          when sta_to_d =>
+             o_bit_enable     <= '1';
+             o_load_left      <= '0';
+             o_load_right     <= '1';
+             o_str_dat        <= '0';       
+             o_cpt_bit_reset  <= '0';         
+          when sta_fin_d =>
+             o_bit_enable     <= '0';
+             o_load_left      <= '0';
+             o_load_right     <= '0';
+             o_str_dat        <= '0';
+             o_cpt_bit_reset  <= '1';
+        when sta_fin =>
+            o_bit_enable     <= '0';
+            o_load_left     <= '0';
+            o_load_right     <= '0';
+            o_str_dat        <=  '1';
+             o_cpt_bit_reset  <= '1';
+        when others =>
+            o_bit_enable     <= '0';
+            o_load_left      <= '0';
+            o_load_right     <= '0';
+            o_str_dat        <= '0';
+        end case;
+    
+    end process;        
+end Behavioral;
      -- decodage compteur avec case ...   «
 --        sig_ctrl_I2S:  process (i_cpt_bits, i_lrc )
 --            begin
@@ -130,67 +211,5 @@ begin
 --                 end case;
 --             end process;
         
-    process(fsm_EtatCourant, d_strobe_btn)
-    begin         
-        case (fsm_EtatCourant) is
-          when sta_s1 =>
-                
-             if d_strobe_btn(0) = '1' then -- incremente
-                fsm_prochainEtat <= sta_s2;
-             elsif d_strobe_btn(1) = '1' then
-                 fsm_prochainEtat <= sta_s4;    
-             else
-                fsm_prochainEtat <= fsm_EtatCourant;
-             end if;
-             
-          when sta_s2 =>
-             if d_strobe_btn(0) = '1' then -- incremente
-                fsm_prochainEtat <= sta_s3;
-             elsif d_strobe_btn(1) = '1' then
-                 fsm_prochainEtat <= sta_s1;
-             else
-                fsm_prochainEtat <= fsm_EtatCourant;
-             end if;
-          
-          when sta_s3 =>
-             if d_strobe_btn(0) = '1' then -- incremente
-                fsm_prochainEtat <= sta_s4;
-             elsif d_strobe_btn(1) = '1' then
-                 fsm_prochainEtat <= sta_s2;
-             else
-                fsm_prochainEtat <= fsm_EtatCourant;
-             end if;
-             
-          when sta_s4 =>
-             if d_strobe_btn(0) = '1' then -- incremente
-                fsm_prochainEtat <= sta_s1;
-             elsif d_strobe_btn(1) = '1' then
-                 fsm_prochainEtat <= sta_s3;
-             else
-                fsm_prochainEtat <= fsm_EtatCourant;
-             end if;                 
-        end case;
-    end process;
-    
-    
-    process(fsm_EtatCourant)
-    begin
-    
-        case (fsm_EtatCourant) is
-          when sta_s1 =>
-             o_selection <= "00";
-             
-          when sta_s2 =>
-             o_selection <= "01";
-          
-          when sta_s3 =>
-             o_selection <= "10";
-          when sta_s4 =>
-             o_selection <= "11";
-        end case;
-    
-    end process;
         
         
-        
-     end Behavioral;
