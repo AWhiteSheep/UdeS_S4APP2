@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------
 -- Test-Bench simul_module_sig_tb.vhd
 ---------------------------------------------------------------------------------------------
--- Université de Sherbrooke - Département de GEGI
+-- Universitï¿½ de Sherbrooke - Dï¿½partement de GEGI
 -- Version         : 1.0
 -- Nomenclature    : 0.8 GRAMS
 -- Date            : 10 janvier 2020
@@ -11,10 +11,10 @@
 -- Outils          : vivado 2019.1
 ---------------------------------------------------------------------------------------------
 -- Description:
--- Developpement d'un test bench pour la problématique de logique séquentielle
+-- Developpement d'un test bench pour la problï¿½matique de logique sï¿½quentielle
 -- Test unitaire de module_sig
 ---------------------------------------------------------------------------------------------
--- À FAIRE POUR L'APP - ADAPTER POUR PLAN DE VÉRIFICATION
+-- ï¿½ FAIRE POUR L'APP - ADAPTER POUR PLAN DE Vï¿½RIFICATION
 --  voir ligne 358
 ---------------------------------------------------------------------------------------------
 
@@ -33,14 +33,14 @@ architecture Behavioral of simul_module_sig_tb is
 
 file leftInputFile : text;
 file rightInputFile : text;
---Chemin depuis le fichier de simulation les fichiers se trouvent à la racine du projet
+--Chemin depuis le fichier de simulation les fichiers se trouvent ï¿½ la racine du projet
 constant leftInputFileName : string := "../../../../leftInput.txt"; 
 constant rightInputFileName : string := "../../../../rightInput.txt";
 
 shared variable fstatusLeft : file_open_status := NAME_ERROR;
 shared variable fstatusRight : file_open_status := NAME_ERROR;
 
--- le codeur I2S est utlisé pour générer le flot I2S
+-- le codeur I2S est utlisï¿½ pour gï¿½nï¿½rer le flot I2S
 component M9_codeur_i2s_imp_1VJCTGL
   Port (
       i_bclk      : in std_logic;
@@ -64,6 +64,13 @@ component M1_decodeur_i2s_imp_17RYJKZ
 );
 end component;
 
+component mux2
+   Generic ( input_length : integer := 24 );
+    Port ( sel : in STD_LOGIC_VECTOR (1 downto 0);
+           input1 : in STD_LOGIC_VECTOR (input_length-1 downto 0);
+           input2 : in STD_LOGIC_VECTOR (input_length-1 downto 0);
+           output0 : out STD_LOGIC_VECTOR (input_length-1 downto 0));
+end component;
 
   component design_1 is
   port (
@@ -116,12 +123,12 @@ end nextRightInput;
     signal   d_ac_mclk     : std_logic := '0';   -- Master Clock horloge 12.288 MHz
     signal   d_cpt_mclk    : std_logic_vector (7 downto 0) := "00000000";
     
-    signal   d_ac_pbdat    : std_logic := '0';   -- I²S (Playback Data)
-    signal   d_sig_pbdat   : std_logic;   -- I²S (Playback Data)
+    signal   d_ac_pbdat    : std_logic := '0';   -- Iï¿½S (Playback Data)
+    signal   d_sig_pbdat   : std_logic;   -- Iï¿½S (Playback Data)
   
-    signal   d_ac_pblrc    : std_logic := '0';  -- I²S (Playback Channel Clock) DAC Sampling Rate Clock,
-    signal   d_ac_recdat   : std_logic;  -- I²S (Record Data)
-    signal   d_ac_reclrc   : std_logic := '0';  -- I²S (Record Channel Clock)   ADC Sampling Rate Clock,
+    signal   d_ac_pblrc    : std_logic := '0';  -- Iï¿½S (Playback Channel Clock) DAC Sampling Rate Clock,
+    signal   d_ac_recdat   : std_logic;  -- Iï¿½S (Record Data)
+    signal   d_ac_reclrc   : std_logic := '0';  -- Iï¿½S (Record Channel Clock)   ADC Sampling Rate Clock,
     
  -- source I2S simulee
     signal  d_val_ech_L    : std_logic_vector(23 downto 0) := (others =>'0') ;  -- ech source simulee canal gauche
@@ -145,7 +152,7 @@ end nextRightInput;
     -- d_ac_reclrc  ~ 48.    KHz    (~ 20.8    us)
     -- d_ac_mclk,   ~ 12.288 MHz    (~ 80,715  ns)
     -- d_ac_bclk    ~ 3,10   MHz    (~ 322,857 ns) freq mclk/4
-    -- La durée d'une période reclrc est de 64,5 périodes de bclk ... ARRONDI a 64 pour simul
+    -- La durï¿½e d'une pï¿½riode reclrc est de 64,5 pï¿½riodes de bclk ... ARRONDI a 64 pour simul
     --   
     constant c_mclk_Period       : time :=  80.715 ns;  -- 12.288 MHz
     constant c_clk_p_Period      : time :=   8     ns;  -- 125 MHz
@@ -260,9 +267,9 @@ end process;
      end process lrc_proc;
 
   -- Le processus suivant cree une copie au front mclk (4 fois plus rapide que bclk)
-  -- ou le d_ac_recdat genere par le codeur I2S simulé est redirigé vers d_ac_pbdat
-  -- (peut être utile pour un test unitaire de décodeur)
-  -- Noter que le module module_sig est connecté à d_sig_pbdat
+  -- ou le d_ac_recdat genere par le codeur I2S simulï¿½ est redirigï¿½ vers d_ac_pbdat
+  -- (peut ï¿½tre utile pour un test unitaire de dï¿½codeur)
+  -- Noter que le module module_sig est connectï¿½ ï¿½ d_sig_pbdat
   --
   inst_sortie_pb_dat : process(d_ac_mclk)
      begin
@@ -273,8 +280,8 @@ end process;
      
 ----------------------------------------------------------------------------------------------------------------------
   --  BANC DE TEST GLOBAL --
-  --  Nous vous présentons une simulation de base générique
-  --  Vous devez changer les lignes ci-dessous pour concorder avec votre plan de vérification
+  --  Nous vous prï¿½sentons une simulation de base gï¿½nï¿½rique
+  --  Vous devez changer les lignes ci-dessous pour concorder avec votre plan de vï¿½rification
 ----------------------------------------------------------------------------------------------------------------------
   tb : PROCESS
      BEGIN
