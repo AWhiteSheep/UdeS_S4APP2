@@ -51,21 +51,33 @@ architecture Behavioral of calcul_param_1 is
 -- Signaux
 ----------------------------------------------------------------------------------
     signal signe_initial, first_received : std_logic := '0';
-
+    type mef_etat is (et_att, et_cpt_1, et_cpt_2, et_fin);
+    signal mef_EtatCourant, mef_EtatProchain: mef_etat;
+    signal en_compteur: std_logic := '0';
+    signal counter, noise: integer := 0;
+    constant NOISE_TOLERANCE: integer := 3;
+    
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
 ---------------------------------------------------------------------------------------------
-    type mef_etat is (et_att, et_cpt_1, et_cpt_2, et_fin);
-    signal mef_EtatCourant, mef_EtatProchain: mef_etat;
     
 begin
 
     process (i_bclk, i_reset)
     begin
         if (i_reset = '1') then
+            -- reset le enable du compteur
+            en_compteur <= '0';
+            -- reset le compteur
+            counter <= 0;
+            -- reset le first_receive égale à 0
+            first_received <= '0';
             mef_EtatCourant <= et_att;
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
             mef_EtatCourant <= mef_EtatProchain;
+            if (en_compteur = '1') then
+                counter <= counter + 1;
+            end if;
         end if;
     end process;
     
@@ -75,21 +87,42 @@ begin
         case(mef_EtatCourant) is
             when et_att =>
                 if (first_received = '0') then
-                    first_received <= '1';
-                    signe_initial <= i_ech(23);
+                    if(signe_initial = i_ech(23)) then
+                        noise <= noise + 1;
+                        if(noise > NOISE_TOLERANCE) then
+                            first_received <= '1';
+                            counter <= noise;
+                            noise <= 0;
+                        end if;
+                    else
+                        signe_initial <= i_ech(23);        
+                        noise <= 0;
+                    end if;
                 elsif not signe_initial = i_ech(23) then
                     -- changement de signe
                     mef_EtatProchain <= et_cpt_1;
                 end if;
-            when et_cpt_1 =>
-                if signe_initial = i_ech(23) then
+            when et_cpt_1 =>                
+                if(signe_initial = i_ech(23)) then
+                    noise <= noise + 1;
                     -- changement de signe
-                    mef_EtatProchain <= et_cpt_2;
-                end if;
+                    if(noise > NOISE_TOLERANCE) then
+                        mef_EtatProchain <= et_cpt_2;
+                        noise <= 0;
+                    end if;
+                else
+                    noise <= 0;
+                end if;            
             when et_cpt_2 =>            
-                if not signe_initial = i_ech(23) then
+                if(not signe_initial = i_ech(23)) then
+                    noise <= noise + 1;
                     -- changement de signe
-                    mef_EtatProchain <= et_fin;
+                    if(noise > NOISE_TOLERANCE) then
+                        mef_EtatProchain <= et_fin;
+                        noise <= 0;
+                    end if;
+                else
+                    noise <= 0;
                 end if;
             when et_fin =>
                 mef_EtatProchain <= et_att;
@@ -100,9 +133,25 @@ begin
     
     process(mef_EtatCourant)
     begin
-    
+        case(mef_EtatCourant) is
+            when et_att =>                
+                en_compteur <= '0';
+                first_received <= '0';
+            when et_cpt_1 | et_cpt_2 =>            
+                -- enable le compteur
+                en_compteur <= '1';
+                first_received <= '1';
+            when et_fin =>
+                en_compteur <= '0';
+                -- envoie à la sortie le nombre d'échantillon sur 8 bits
+                o_param <= std_logic_vector(to_unsigned(counter, 8));
+                -- reset le compteur
+                counter <= 0;
+                -- reset le first_receive égale à 0
+                first_received <= '0';
+            when others =>
+                first_received <= '0';
+        end case;
     end process;
-
-     o_param <= x"01";    -- temporaire ...
  
 end Behavioral;
