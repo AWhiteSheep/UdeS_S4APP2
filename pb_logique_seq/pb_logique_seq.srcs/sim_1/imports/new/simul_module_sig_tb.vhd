@@ -40,95 +40,45 @@ constant rightInputFileName : string := "../../../../rightInput.txt";
 shared variable fstatusLeft : file_open_status := NAME_ERROR;
 shared variable fstatusRight : file_open_status := NAME_ERROR;
 
-    -- le codeur I2S est utlisé pour générer le flot I2S
-    component M9_codeur_i2s_imp_1VJCTGL
-      Port (
-          i_bclk      : in std_logic;
-          i_reset      : in std_logic;
-          i_lrc       : in std_logic;
-          i_dat_left  : in  std_logic_vector(23 downto 0);
-          i_dat_right : in  std_logic_vector(23 downto 0);
-          o_dat       : out std_logic_vector(0 downto 0)
-      );
-    end component;
-    
-    component M1_decodeur_i2s_imp_17RYJKZ
-      Port (
-          clk      : in std_logic;
-          i_reset      : in std_logic;
-          i_lrc       : in std_logic;
-          i_data       : in std_logic;
-          o_dat_left  : out  std_logic_vector(23 downto 0);
-          o_dat_right : out  std_logic_vector(23 downto 0);
-          o_str_dat   : out std_logic
-    );
-    end component;
+-- le codeur I2S est utlisé pour générer le flot I2S
+component M9_codeur_i2s_imp_1VJCTGL
+  Port (
+      i_bclk      : in std_logic;
+      i_reset      : in std_logic;
+      i_lrc       : in std_logic;
+      i_dat_left  : in  std_logic_vector(23 downto 0);
+      i_dat_right : in  std_logic_vector(23 downto 0);
+      o_dat       : out std_logic_vector(0 downto 0)
+  );
+end component;
 
-    component mef_decod_i2s_v1b is
-       Port ( 
-       i_bclk      : in std_logic;
-       i_reset     : in    std_logic; 
-       i_lrc       : in std_logic;
-       i_cpt_bits  : in std_logic_vector(6 downto 0);
-     --  
-       o_bit_enable     : out std_logic ;  --
-       o_load_left      : out std_logic ;  --
-       o_load_right     : out std_logic ;  --
-       o_str_dat        : out std_logic ;  --  
-       o_cpt_bit_reset  : out std_logic   -- 
-    
-    );
-    end component;
+component M1_decodeur_i2s_imp_17RYJKZ
+  Port (
+      clk      : in std_logic;
+      i_reset      : in std_logic;
+      i_lrc       : in std_logic;
+      i_data       : in std_logic;
+      o_dat_left  : out  std_logic_vector(23 downto 0);
+      o_dat_right : out  std_logic_vector(23 downto 0);
+      o_str_dat   : out std_logic
+);
+end component;
 
 
-    component compteur_nbits is
-    generic (nbits : integer := 7);
-       port ( clk             : in    std_logic; 
-              i_en            : in    std_logic; 
-              reset           : in    std_logic; 
-              o_val_cpt       : out   std_logic_vector (nbits-1 downto 0)
-              );
-    end component;
-
-    component reg_dec_24b is
-      Port ( 
-        i_clk       : in std_logic;      -- horloge
-        i_reset     : in std_logic;      -- reinitialisation
-        i_load      : in std_logic;      -- activation chargement parallele
-        i_en        : in std_logic;      -- activation decalage
-        i_dat_bit   : in std_logic;      -- entree serie
-        i_dat_load  : in std_logic_vector(23 downto 0);    -- entree parallele
-        o_dat       : out  std_logic_vector(23 downto 0)   -- sortie parallele
-    );
-    end component;
-    
-    
-    component reg_24b is
-      Port ( 
-        i_clk       : in std_logic;
-        i_reset     : in std_logic;
-        i_en        : in std_logic;
-        i_dat       : in std_logic_vector(23 downto 0);
-        o_dat       : out  std_logic_vector(23 downto 0)
-    );
-    end component;
-    
-    
-
-    component design_1 is
-    port (
-        i_recdat : in STD_LOGIC;
-        i_lrc : in STD_LOGIC;
-        i_btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
-        i_sw : in STD_LOGIC_VECTOR ( 3 downto 0 );
-        clk_100MHz : in STD_LOGIC;
-        o_pbdat : out STD_LOGIC_VECTOR ( 0 to 0 );
-        JPmod : out STD_LOGIC_VECTOR ( 7 downto 0 );
-        o_param : out STD_LOGIC_VECTOR ( 7 downto 0 );
-        o_sel_fct : out STD_LOGIC_VECTOR ( 1 downto 0 );
-        o_sel_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
-    );
-    end component design_1;
+  component design_1 is
+  port (
+    i_recdat : in STD_LOGIC;
+    i_lrc : in STD_LOGIC;
+    i_btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    i_sw : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    clk_100MHz : in STD_LOGIC;
+    o_pbdat : out STD_LOGIC_VECTOR ( 0 to 0 );
+    JPmod : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    o_param : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    o_sel_fct : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    o_sel_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
+  );
+  end component design_1;
   
 impure function nextLeftInput return std_logic_vector is 
 variable iline : line;
@@ -161,16 +111,7 @@ begin
         return x"000000";
     end if;
 end nextRightInput;
-
-    signal   o_dat_right     : std_logic_vector(23 downto 0) := (others =>'0');
-    signal   o_dat_left     : std_logic_vector(23 downto 0) := (others =>'0');
  
-    signal   d_en            : std_logic := '0'; 
-    signal   d_reg_dat       : std_logic_vector(23 downto 0) := (others =>'0');
-    signal   d_load_left     : std_logic := '0'; 
-    signal   d_load_right    : std_logic := '0'; 
-    signal   d_cpt_reset     : std_logic := '0'; 
-    
     signal   d_ac_bclk     : std_logic := '0';   -- bit clock ... horloge I2S digital audio
     signal   d_ac_mclk     : std_logic := '0';   -- Master Clock horloge 12.288 MHz
     signal   d_cpt_mclk    : std_logic_vector (7 downto 0) := "00000000";
@@ -183,13 +124,12 @@ end nextRightInput;
     signal   d_ac_reclrc   : std_logic := '0';  -- I²S (Record Channel Clock)   ADC Sampling Rate Clock,
     
  -- source I2S simulee
-    signal  d_val_ech_L    : std_logic_vector(23 downto 0) := (others =>'0');  -- ech source simulee canal gauche
-    signal  d_val_ech_R    : std_logic_vector(23 downto 0) := (others =>'0');  -- ech source simulee canal droite
+    signal  d_val_ech_L    : std_logic_vector(23 downto 0) := (others =>'0') ;  -- ech source simulee canal gauche
+    signal  d_val_ech_R    : std_logic_vector(23 downto 0) := (others =>'0') ;  -- ech source simulee canal droite
     signal  d_val_ech_R_u  : std_logic_vector(23 downto 0) := (others =>'0');   -- ech source simulee transforme pour affichage
     signal  d_val_ech_L_u  : std_logic_vector(23 downto 0) := (others =>'0');   -- ech source simulee transforme pour affichage
     signal  d_ech_reg_left : std_logic_vector(23 downto 0) := (others =>'0');    -- echantillon canal gauche
     signal  d_ech_reg_right: std_logic_vector(23 downto 0) := (others =>'0');    -- echantillon canal droite
-    signal  d_val_cpt      : std_logic_vector (6 downto 0);
 
     --signal s_ech_gen : std_logic_vector(23 downto 0) := (others =>'0');
     signal s_reset   : std_logic;
@@ -209,7 +149,6 @@ end nextRightInput;
     --   
     constant c_mclk_Period       : time :=  80.715 ns;  -- 12.288 MHz
     constant c_clk_p_Period      : time :=   8     ns;  -- 125 MHz
-    
     
 
 
@@ -245,75 +184,19 @@ begin
     );
   
     --prevu pour test d'un decodeur
---    UUT_decodeur: M1_decodeur_i2s_imp_17RYJKZ
---     Port map
---        (
---          clk      =>  d_ac_bclk,
---          i_reset     =>  s_reset,
---          i_lrc       =>  d_ac_pblrc,
---          i_data       =>  d_sig_pbdat,
---          o_dat_left  =>  d_ech_reg_left,
---          o_dat_right =>  d_ech_reg_right,
---          o_str_dat   =>  open
---      );
-
-    UUT_cpt : compteur_nbits
-       Port map 
-       ( 
-            clk        => d_ac_bclk, 
-            i_en       => d_en,
-            reset      => d_cpt_reset,
-            o_val_cpt  => d_val_cpt
-        );
-      
-    UUT_decodeur: mef_decod_i2s_v1b
-        Port map 
-        ( 
-            i_bclk           => d_ac_bclk,
-            i_reset          => s_reset,
-            i_lrc            => d_ac_pblrc,
-            i_cpt_bits       => d_val_cpt,
-            --  
-            o_bit_enable     => d_en,
-            o_load_left      => d_load_left,
-            o_load_right     => d_load_right,
-            o_str_dat        => open,
-            o_cpt_bit_reset  => d_cpt_reset 
-        );
-        
-    UUT_reg_dec : reg_dec_24b 
-        Port map 
-        ( 
-            i_clk       => d_ac_bclk,
-            i_reset     => s_reset,
-            i_load      => '0',
-            i_en        => d_en,
-            i_dat_bit   => d_sig_pbdat,
-            i_dat_load  => "000000000000000000000000",
-            o_dat       => d_reg_dat
-        );
-       
-    UUT_reg_right :  reg_24b 
-        Port map 
-        ( 
-            i_clk       => d_ac_bclk,
-            i_reset     => s_reset,
-            i_en        => d_load_right,
-            i_dat       => d_reg_dat,
-            o_dat       => o_dat_right
-        ); 
-              
-    UUT_reg_left :  reg_24b 
-        Port map 
-        ( 
-            i_clk       => d_ac_bclk,
-            i_reset     => s_reset,
-            i_en        => d_load_left,
-            i_dat       => d_reg_dat,
-            o_dat       => o_dat_left
-        );
-      
-   
+    UUT_decodeur: M1_decodeur_i2s_imp_17RYJKZ
+     Port map
+        (
+          clk      =>  d_ac_bclk,
+          i_reset     =>  s_reset,
+          i_lrc       =>  d_ac_pblrc,
+          i_data       =>  d_sig_pbdat,
+          o_dat_left  =>  d_ech_reg_left,
+          o_dat_right =>  d_ech_reg_right,
+          o_str_dat   =>  open
+      );
+    
+  
   
    ----------------------------------------------------------------------------
    -- generation horloge

@@ -54,7 +54,7 @@ architecture Behavioral of calcul_param_1 is
     type mef_etat is (et_att, et_cpt_1, et_cpt_2, et_fin);
     signal mef_EtatCourant, mef_EtatProchain: mef_etat;
     signal en_compteur: std_logic := '0';
-    signal counter, noise: integer := 0;
+    signal p1_counter, noise: integer := 0;
     constant NOISE_TOLERANCE: integer := 3;
     
 ---------------------------------------------------------------------------------------------
@@ -69,14 +69,16 @@ begin
             -- reset le enable du compteur
             en_compteur <= '0';
             -- reset le compteur
-            counter <= 0;
+            p1_counter <= 0;
             -- reset le first_receive égale à 0
             first_received <= '0';
             mef_EtatCourant <= et_att;
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
             mef_EtatCourant <= mef_EtatProchain;
             if (en_compteur = '1') then
-                counter <= counter + 1;
+                p1_counter <= p1_counter + 1;
+            else
+                p1_counter <= 0;
             end if;
         end if;
     end process;
@@ -91,7 +93,7 @@ begin
                         noise <= noise + 1;
                         if(noise > NOISE_TOLERANCE) then
                             first_received <= '1';
-                            counter <= noise;
+                            -- counter <= noise;
                             noise <= 0;
                         end if;
                     else
@@ -144,9 +146,9 @@ begin
             when et_fin =>
                 en_compteur <= '0';
                 -- envoie à la sortie le nombre d'échantillon sur 8 bits
-                o_param <= std_logic_vector(to_unsigned(counter, 8));
+                o_param <= std_logic_vector(to_unsigned(p1_counter, 8));
                 -- reset le compteur
-                counter <= 0;
+                -- p1_counter <= 0;
                 -- reset le first_receive égale à 0
                 first_received <= '0';
             when others =>

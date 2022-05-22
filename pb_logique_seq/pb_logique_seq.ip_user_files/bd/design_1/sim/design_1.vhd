@@ -61,7 +61,7 @@ architecture STRUCTURE of M1_decodeur_i2s_imp_17RYJKZ is
     o_dat : out STD_LOGIC_VECTOR ( 23 downto 0 )
   );
   end component design_1_reg_dec_24b_0_0;
-  component design_1_mef_decod_i2s_v1b_0_0 is
+  component mef_decod_i2s_v1b is
   port (
     i_bclk : in STD_LOGIC;
     i_reset : in STD_LOGIC;
@@ -73,7 +73,7 @@ architecture STRUCTURE of M1_decodeur_i2s_imp_17RYJKZ is
     o_str_dat : out STD_LOGIC;
     o_cpt_bit_reset : out STD_LOGIC
   );
-  end component design_1_mef_decod_i2s_v1b_0_0;
+  end component mef_decod_i2s_v1b;
   signal clk_1 : STD_LOGIC;
   signal compteur_nbits_0_o_val_cpt : STD_LOGIC_VECTOR ( 6 downto 0 );
   signal i_data_1 : STD_LOGIC;
@@ -95,7 +95,7 @@ begin
   o_dat_left(23 downto 0) <= reg_24b_1_o_dat(23 downto 0);
   o_dat_right(23 downto 0) <= reg_24b_0_o_dat(23 downto 0);
   o_str_dat <= mef_decod_i2s_v1b_0_o_str_dat;
-MEF_decodeur_i2s: component design_1_mef_decod_i2s_v1b_0_0
+MEF_decodeur_i2s: component mef_decod_i2s_v1b
      port map (
       i_bclk => clk_1,
       i_cpt_bits(6 downto 0) => compteur_nbits_0_o_val_cpt(6 downto 0),

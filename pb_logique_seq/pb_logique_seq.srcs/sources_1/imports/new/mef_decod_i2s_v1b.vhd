@@ -68,15 +68,19 @@ begin
 
     
    -- Assignation du prochain �tat
-    process(i_bclk, i_reset)
+    prochain_etat_assign: process(i_bclk, i_reset)
     begin
        if (i_reset ='1') then
-             fsm_EtatCourant <= sta_init;
+           fsm_EtatCourant <= sta_init;
        else
-       if falling_edge(i_bclk) and (fsm_EtatCourant = sta_to_g) then
-             fsm_EtatCourant <= fsm_prochainEtat;
-       elsif rising_edge(i_bclk) and (fsm_EtatCourant = sta_to_d) then
-             fsm_EtatCourant <= fsm_prochainEtat;
+       if(fsm_EtatCourant = sta_to_g) then
+           if falling_edge(i_bclk) then
+                fsm_EtatCourant <= fsm_prochainEtat;
+           end if;
+       elsif (fsm_EtatCourant = sta_to_d) then
+           if rising_edge(i_bclk) then
+                fsm_EtatCourant <= fsm_prochainEtat;
+           end if;
        end if;
        end if;
     end process;
@@ -96,36 +100,36 @@ begin
          o_cpt_bit_reset <= (d_reclrc_prec xor i_lrc) or i_reset;
       end process;
       
-    process(fsm_EtatCourant, i_lrc, i_cpt_bits)
+    changement_etat: process(fsm_EtatCourant, i_lrc, i_cpt_bits)
     begin         
         case (fsm_EtatCourant) is          
           when sta_init =>
-            fsm_EtatCourant <= sta_to_g;
+            fsm_prochainEtat <= sta_to_g;
           when sta_to_g =>
             if (i_cpt_bits = "11000") then
-                fsm_EtatCourant <= sta_fin_g;
+                fsm_prochainEtat <= sta_fin_g;
             else
-                fsm_EtatCourant <= sta_to_g;
+                fsm_prochainEtat <= sta_to_g;
             end if;
           when sta_fin_g =>
-            fsm_EtatCourant <= sta_to_d;
+            fsm_prochainEtat <= sta_to_d;
           when sta_to_d =>
             if (i_cpt_bits = "11000") then
-                fsm_EtatCourant <= sta_fin_d;
+                fsm_prochainEtat <= sta_fin_d;
             else
-                fsm_EtatCourant <= sta_to_d;
+                fsm_prochainEtat <= sta_to_d;
             end if;
           when sta_fin_d =>
-            fsm_EtatCourant <= sta_fin;
+            fsm_prochainEtat <= sta_fin;
         when sta_fin =>
-            fsm_EtatCourant <= sta_init;
+            fsm_prochainEtat <= sta_init;
         when others =>     
-            fsm_EtatCourant <= sta_init;
+            fsm_prochainEtat <= sta_init;
         end case;
     end process;
     
     
-    process(fsm_EtatCourant, i_lrc)
+    etat_porte: process(fsm_EtatCourant, i_lrc)
     begin    
         case (fsm_EtatCourant) is
           when sta_init =>

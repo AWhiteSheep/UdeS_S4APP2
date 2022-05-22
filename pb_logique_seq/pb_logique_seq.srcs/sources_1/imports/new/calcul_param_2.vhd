@@ -54,7 +54,7 @@ architecture Behavioral of calcul_param_2 is
     signal alpha_power_1, alpha_power_2, alpha_power_3, alpha_power_4, alpha_power_5, alpha_sum: std_logic_vector(12 downto 0) := (others => '0');
     type mef_etat is (et_att, et_cpt_1, et_cpt_2, et_fin);
     signal mef_EtatCourant, mef_EtatProchain: mef_etat;
-    signal noise, counter: integer := 0;
+    signal noise, p2_counter: integer range 0 to 1000 := 0;
     signal en_compteur, first_received, signe_initial : std_logic := '0';
     
     constant NOISE_TOLERANCE : integer := 8;
@@ -79,7 +79,7 @@ begin
             alpha_power_4(7 downto 1) <= alpha_y(6 downto 0);
             alpha_power_5(6 downto 0) <= alpha_y(6 downto 0);
             alpha_sum <= alpha_power_1 + alpha_power_2 + alpha_power_3 + alpha_power_4 + alpha_power_5;
-            alpha_y <= alpha_y(12 downto 5);
+           -- alpha_y <= alpha_y(12 downto 5);
             
         end if;
     end process;
@@ -91,14 +91,16 @@ begin
             -- reset le enable du compteur
             en_compteur <= '0';
             -- reset le compteur
-            counter <= 0;
+            p2_counter <= 0;
             -- reset le first_receive égale à 0
             first_received <= '0';
             mef_EtatCourant <= et_att;
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
             mef_EtatCourant <= mef_EtatProchain;
             if (en_compteur = '1') then
-                counter <= counter + 1;
+                p2_counter <= p2_counter + 1;
+            else
+                p2_counter <= 0;
             end if;
         end if;
     end process;
@@ -113,7 +115,7 @@ begin
                         noise <= noise + 1;
                         if(noise > NOISE_TOLERANCE) then
                             first_received <= '1';
-                            counter <= noise;
+                            -- p2_counter <= noise;
                             noise <= 0;
                         end if;
                     else
@@ -166,9 +168,9 @@ begin
             when et_fin =>
                 en_compteur <= '0';
                 -- envoie à la sortie le nombre d'échantillon sur 8 bits
-                o_param <= std_logic_vector(to_unsigned(counter, 8));
+                o_param <= std_logic_vector(to_unsigned(p2_counter, 8));
                 -- reset le compteur
-                counter <= 0;
+                -- p2_counter <= 0;
                 -- reset le first_receive égale à 0
                 first_received <= '0';
             when others =>
