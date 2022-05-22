@@ -25,7 +25,7 @@ ARCHITECTURE BEHAVIOR OF module_commande IS
 
 
 component conditionne_btn_v7 is
-generic (nbtn : integer := nbtn;  mode_simul: std_logic := '0');
+generic (nbtn : integer := 4;  mode_simul: std_logic := '0');
     port (
          CLK          : in std_logic;         -- devrait etre de l ordre de 50 Mhz
          i_btn        : in    std_logic_vector (nbtn-1 downto 0);
@@ -140,7 +140,7 @@ BEGIN
    o_btn_cd        <= d_btn_cd;
    o_selection_par <= i_sw(1 downto 0); -- mode de selection du parametre par sw
    o_selection_fct <= o_selection; -- mode de selection de la fonction par sw
-   d_reset         <= i_btn(3);         -- pas de contionnement particulier sur reset
+   d_reset         <= i_btn(1);         -- pas de contionnement particulier sur reset
    o_reset         <= d_reset;          -- pas de contionnement particulier sur reset
 
 END BEHAVIOR;

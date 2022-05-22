@@ -45,7 +45,7 @@ entity mef_decod_i2s_v1b is
    o_load_right     : out std_logic ;  --
    o_str_dat        : out std_logic ;  --  
    o_cpt_bit_reset  : out std_logic   -- 
-   
+
 );
 end mef_decod_i2s_v1b;
 
@@ -82,7 +82,7 @@ begin
     end process;
 
    -- pour detecter transitions d_ac_reclrc
-   reglrc_I2S: process ( i_bclk)
+   reglrc_I2S: process (i_bclk)
    begin
    if i_bclk'event and (i_bclk = '1') then
         d_reclrc_prec <= i_lrc;

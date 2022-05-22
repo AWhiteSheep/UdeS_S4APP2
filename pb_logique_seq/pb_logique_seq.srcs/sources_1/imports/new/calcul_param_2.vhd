@@ -54,7 +54,10 @@ architecture Behavioral of calcul_param_2 is
     signal alpha_power_1, alpha_power_2, alpha_power_3, alpha_power_4, alpha_power_5, alpha_sum: std_logic_vector(12 downto 0) := (others => '0');
     type mef_etat is (et_att, et_cpt_1, et_cpt_2, et_fin);
     signal mef_EtatCourant, mef_EtatProchain: mef_etat;
-    signal noise: integer := 0;
+    signal noise, counter: integer := 0;
+    signal en_compteur, first_received, signe_initial : std_logic := '0';
+    
+    constant NOISE_TOLERANCE : integer := 8;
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
 ---------------------------------------------------------------------------------------------
@@ -80,10 +83,8 @@ begin
             
         end if;
     end process;
-    
-    
-    
 
+    
     process (i_bclk, i_reset)
     begin
         if (i_reset = '1') then

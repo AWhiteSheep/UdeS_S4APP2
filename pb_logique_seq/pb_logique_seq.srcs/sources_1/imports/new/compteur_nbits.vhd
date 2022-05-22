@@ -23,7 +23,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;  -- pour les additions dans les compteurs
 
 entity compteur_nbits is
-generic (nbits : integer := 8);
+generic (nbits : integer := 7);
    port ( clk             : in    std_logic; 
           i_en            : in    std_logic; 
           reset           : in    std_logic; 

@@ -57,9 +57,9 @@ ENTITY design_1_module_commande_0_0 IS
   PORT (
     clk : IN STD_LOGIC;
     o_reset : OUT STD_LOGIC;
-    i_btn : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+    i_btn : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
     i_sw : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-    o_btn_cd : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+    o_btn_cd : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     o_selection_fct : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     o_selection_par : OUT STD_LOGIC_VECTOR(1 DOWNTO 0)
   );
@@ -76,9 +76,9 @@ ARCHITECTURE design_1_module_commande_0_0_arch OF design_1_module_commande_0_0 I
     PORT (
       clk : IN STD_LOGIC;
       o_reset : OUT STD_LOGIC;
-      i_btn : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+      i_btn : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
       i_sw : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-      o_btn_cd : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+      o_btn_cd : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
       o_selection_fct : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
       o_selection_par : OUT STD_LOGIC_VECTOR(1 DOWNTO 0)
     );
@@ -94,7 +94,7 @@ ARCHITECTURE design_1_module_commande_0_0_arch OF design_1_module_commande_0_0 I
 BEGIN
   U0 : module_commande
     GENERIC MAP (
-      nbtn => 4,
+      nbtn => 2,
       mode_simulation => '0'
     )
     PORT MAP (
