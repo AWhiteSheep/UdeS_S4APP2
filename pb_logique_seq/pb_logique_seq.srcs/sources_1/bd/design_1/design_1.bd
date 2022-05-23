@@ -23,10 +23,10 @@
         "xlconcat_0": "",
         "xlconstant_0": "",
         "xlslice_0": "",
+        "mef_cod_i2s_vsb_0": "",
         "compteur_nbits_0": "",
         "mux2_0": "",
-        "reg_dec_24b_fd_0": "",
-        "mef_cod_i2s_vsb_0": ""
+        "reg_dec_24b_fd_0": ""
       },
       "M10_conversion_affichage": "",
       "parametre_0": "",
@@ -560,6 +560,81 @@
               }
             }
           },
+          "mef_cod_i2s_vsb_0": {
+            "vlnv": "xilinx.com:module_ref:mef_cod_i2s_vsb:1.0",
+            "xci_name": "design_1_mef_cod_i2s_vsb_0_0",
+            "xci_path": "ip\\design_1_mef_cod_i2s_vsb_0_0\\design_1_mef_cod_i2s_vsb_0_0.xci",
+            "inst_hier_path": "M9_codeur_i2s/mef_cod_i2s_vsb_0",
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "mef_cod_i2s_vsb",
+              "boundary_crc": "0x0"
+            },
+            "ports": {
+              "i_bclk": {
+                "direction": "I",
+                "parameters": {
+                  "FREQ_HZ": {
+                    "value": "100000000",
+                    "value_src": "user_prop"
+                  },
+                  "PHASE": {
+                    "value": "0.000",
+                    "value_src": "default_prop"
+                  },
+                  "CLK_DOMAIN": {
+                    "value": "design_1_clk_100MHz",
+                    "value_src": "default_prop"
+                  }
+                }
+              },
+              "i_reset": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "i_lrc": {
+                "direction": "I"
+              },
+              "i_cpt_bits": {
+                "direction": "I",
+                "left": "6",
+                "right": "0"
+              },
+              "o_bit_enable": {
+                "direction": "O"
+              },
+              "o_load_left": {
+                "direction": "O",
+                "parameters": {
+                  "PortType": {
+                    "value": "undef",
+                    "value_src": "ip_prop"
+                  },
+                  "PortType.PROP_SRC": {
+                    "value": "false",
+                    "value_src": "ip_prop"
+                  }
+                }
+              },
+              "o_load_right": {
+                "direction": "O",
+                "parameters": {
+                  "PortType": {
+                    "value": "undef",
+                    "value_src": "ip_prop"
+                  },
+                  "PortType.PROP_SRC": {
+                    "value": "false",
+                    "value_src": "ip_prop"
+                  }
+                }
+              },
+              "o_cpt_bit_reset": {
+                "type": "rst",
+                "direction": "O"
+              }
+            }
+          },
           "compteur_nbits_0": {
             "vlnv": "xilinx.com:module_ref:compteur_nbits:1.0",
             "xci_name": "design_1_compteur_nbits_0_1",
@@ -710,81 +785,6 @@
                 "right": "0"
               }
             }
-          },
-          "mef_cod_i2s_vsb_0": {
-            "vlnv": "xilinx.com:module_ref:mef_cod_i2s_vsb:1.0",
-            "xci_name": "design_1_mef_cod_i2s_vsb_0_0",
-            "xci_path": "ip\\design_1_mef_cod_i2s_vsb_0_0\\design_1_mef_cod_i2s_vsb_0_0.xci",
-            "inst_hier_path": "M9_codeur_i2s/mef_cod_i2s_vsb_0",
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "mef_cod_i2s_vsb",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "i_bclk": {
-                "direction": "I",
-                "parameters": {
-                  "FREQ_HZ": {
-                    "value": "100000000",
-                    "value_src": "user_prop"
-                  },
-                  "PHASE": {
-                    "value": "0.000",
-                    "value_src": "default_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "design_1_clk_100MHz",
-                    "value_src": "default_prop"
-                  }
-                }
-              },
-              "i_reset": {
-                "type": "rst",
-                "direction": "I"
-              },
-              "i_lrc": {
-                "direction": "I"
-              },
-              "i_cpt_bits": {
-                "direction": "I",
-                "left": "6",
-                "right": "0"
-              },
-              "o_bit_enable": {
-                "direction": "O"
-              },
-              "o_load_left": {
-                "direction": "O",
-                "parameters": {
-                  "PortType": {
-                    "value": "undef",
-                    "value_src": "ip_prop"
-                  },
-                  "PortType.PROP_SRC": {
-                    "value": "false",
-                    "value_src": "ip_prop"
-                  }
-                }
-              },
-              "o_load_right": {
-                "direction": "O",
-                "parameters": {
-                  "PortType": {
-                    "value": "undef",
-                    "value_src": "ip_prop"
-                  },
-                  "PortType.PROP_SRC": {
-                    "value": "false",
-                    "value_src": "ip_prop"
-                  }
-                }
-              },
-              "o_cpt_bit_reset": {
-                "type": "rst",
-                "direction": "O"
-              }
-            }
           }
         },
         "nets": {
@@ -860,16 +860,16 @@
           "i_reset_0_1": {
             "ports": [
               "i_reset",
-              "reg_dec_24b_fd_0/i_reset",
-              "mef_cod_i2s_vsb_0/i_reset"
+              "mef_cod_i2s_vsb_0/i_reset",
+              "reg_dec_24b_fd_0/i_reset"
             ]
           },
           "i_bclk_0_1": {
             "ports": [
               "i_bclk",
+              "mef_cod_i2s_vsb_0/i_bclk",
               "compteur_nbits_0/clk",
-              "reg_dec_24b_fd_0/i_clk",
-              "mef_cod_i2s_vsb_0/i_bclk"
+              "reg_dec_24b_fd_0/i_clk"
             ]
           },
           "xlconstant_0_dout": {

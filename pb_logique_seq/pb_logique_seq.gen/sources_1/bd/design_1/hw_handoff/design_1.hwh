@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat May 21 16:55:27 2022" VIVADOVERSION="2020.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon May 23 12:28:53 2022" VIVADOVERSION="2020.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="digilentinc.com:zybo-z7-10:part0:1.0" DEVICE="7z010" NAME="design_1" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -32,9 +32,9 @@
         <CONNECTION INSTANCE="M1_decodeur_i2s_registre_24bits_gauche" PORT="i_clk"/>
         <CONNECTION INSTANCE="M1_decodeur_i2s_registre_decalage_24bits" PORT="i_clk"/>
         <CONNECTION INSTANCE="M1_decodeur_i2s_MEF_decodeur_i2s" PORT="i_bclk"/>
+        <CONNECTION INSTANCE="M9_codeur_i2s_mef_cod_i2s_vsb_0" PORT="i_bclk"/>
         <CONNECTION INSTANCE="M9_codeur_i2s_compteur_nbits_0" PORT="clk"/>
         <CONNECTION INSTANCE="M9_codeur_i2s_reg_dec_24b_fd_0" PORT="i_clk"/>
-        <CONNECTION INSTANCE="M9_codeur_i2s_mef_cod_i2s_vsb_0" PORT="i_bclk"/>
         <CONNECTION INSTANCE="M10_conversion_affichage" PORT="clk"/>
         <CONNECTION INSTANCE="M7_parametre_3" PORT="i_bclk"/>
         <CONNECTION INSTANCE="M8_commande" PORT="clk"/>
@@ -495,8 +495,8 @@
             <CONNECTION INSTANCE="M1_decodeur_i2s_registre_24bits_gauche" PORT="i_reset"/>
             <CONNECTION INSTANCE="M1_decodeur_i2s_registre_decalage_24bits" PORT="i_reset"/>
             <CONNECTION INSTANCE="M1_decodeur_i2s_MEF_decodeur_i2s" PORT="i_reset"/>
-            <CONNECTION INSTANCE="M9_codeur_i2s_reg_dec_24b_fd_0" PORT="i_reset"/>
             <CONNECTION INSTANCE="M9_codeur_i2s_mef_cod_i2s_vsb_0" PORT="i_reset"/>
+            <CONNECTION INSTANCE="M9_codeur_i2s_reg_dec_24b_fd_0" PORT="i_reset"/>
             <CONNECTION INSTANCE="M10_conversion_affichage" PORT="reset"/>
             <CONNECTION INSTANCE="M7_parametre_3" PORT="i_reset"/>
             <CONNECTION INSTANCE="M5_parametre_1" PORT="i_reset"/>

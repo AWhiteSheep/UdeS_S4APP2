@@ -67,7 +67,7 @@ begin
     begin
         if (i_reset = '1') then
             -- reset le enable du compteur
-            en_compteur <= '0';
+--            en_compteur <= '0';
             -- reset le compteur
             p1_counter <= 0;
             -- reset le first_receive égale à 0
@@ -146,7 +146,7 @@ begin
             when et_fin =>
                 en_compteur <= '0';
                 -- envoie à la sortie le nombre d'échantillon sur 8 bits
-                o_param <= std_logic_vector(to_unsigned(p1_counter, 8));
+                o_param <= std_logic_vector(to_unsigned(p1_counter, o_param'length));
                 -- reset le compteur
                 -- p1_counter <= 0;
                 -- reset le first_receive égale à 0
