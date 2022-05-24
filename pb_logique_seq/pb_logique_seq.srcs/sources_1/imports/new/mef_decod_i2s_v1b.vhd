@@ -56,13 +56,9 @@ architecture Behavioral of mef_decod_i2s_v1b is
          sta_reset,
          sta_enable,
          sta_to,
-         sta_idle_g,
-         sta_idle_g_1,
          sta_reset_1,
          sta_enable_1,
          sta_to_1,
-         sta_idle_d,
-         sta_idle_d_1,
          sta_fin
      ); 
        
@@ -73,17 +69,26 @@ architecture Behavioral of mef_decod_i2s_v1b is
 begin
 
    -- pour detecter transitions d_ac_reclrc
-   reglrc_I2S: process (i_bclk, i_reset)
+   reglrc_I2S: process (i_bclk, i_reset, i_lrc)
    begin
        if i_bclk'event and (i_bclk = '1') then
             d_reclrc_prec <= i_lrc;        
        end if;       
+       
        if (i_reset ='1') then
              fsm_EtatCourant <= sta_init;
        else
-       if rising_edge(i_bclk) then
+        if(fsm_EtatCourant = sta_init) then
+           if (rising_edge(i_lrc)) then
+             -- droite
+             fsm_EtatCourant <= sta_reset_1;
+           elsif(falling_edge(i_lrc)) then
+             -- gauche
+             fsm_EtatCourant <= sta_reset;
+           end if;
+        elsif rising_edge(i_bclk) then
              fsm_EtatCourant <= fsm_prochainEtat;
-       end if;
+        end if;
        end if;       
    end process;
       
@@ -91,39 +96,31 @@ begin
     begin         
         case (fsm_EtatCourant) is          
           when sta_init =>
-            fsm_prochainEtat <= sta_fin;
+            fsm_prochainEtat <= sta_init;
           when sta_reset =>
             fsm_prochainEtat <= sta_enable;
           when sta_enable =>
             if (i_cpt_bits = "0010111") then
-                fsm_prochainEtat <= sta_idle_g;
---                fsm_prochainEtat <= sta_to;
+--                fsm_prochainEtat <= sta_idle_g;
+                fsm_prochainEtat <= sta_to;
             else
                 fsm_prochainEtat <= fsm_EtatCourant;
             end if;
-          when sta_idle_g =>
-            fsm_prochainEtat <= sta_idle_g_1;
-          when sta_idle_g_1 =>
-            fsm_prochainEtat <= sta_to;
           when sta_to =>
-             fsm_prochainEtat <= sta_reset_1;
+             fsm_prochainEtat <= sta_init;
           when sta_reset_1 =>
             fsm_prochainEtat <= sta_enable_1;
           when sta_enable_1 =>
             if (i_cpt_bits = "0010111") then
-                fsm_prochainEtat <= sta_idle_d;
---                fsm_prochainEtat <= sta_to_1;
+--                fsm_prochainEtat <= sta_idle_d;
+                fsm_prochainEtat <= sta_to_1;
             else
                 fsm_prochainEtat <= fsm_EtatCourant;
             end if;
-          when sta_idle_d =>
-            fsm_prochainEtat <= sta_idle_d_1;
-          when sta_idle_d_1 =>
-            fsm_prochainEtat <= sta_to_1;
           when sta_to_1 =>
                 fsm_prochainEtat <= sta_fin;
           when sta_fin =>
-            fsm_prochainEtat <= sta_enable;
+            fsm_prochainEtat <= sta_init;
         when others =>     
             fsm_prochainEtat <= sta_init;
         end case;
@@ -147,12 +144,6 @@ begin
                 o_cpt_bit_reset <= '1';
             when sta_enable | sta_enable_1 => 
                 o_bit_enable     <= '1';
-                o_load_left      <= '0';
-                o_load_right     <= '0';
-                o_str_dat        <= '0';
-                o_cpt_bit_reset <= '0';
-            when sta_idle_g | sta_idle_g_1 | sta_idle_d | sta_idle_d_1 =>
-                o_bit_enable     <= '0';
                 o_load_left      <= '0';
                 o_load_right     <= '0';
                 o_str_dat        <= '0';

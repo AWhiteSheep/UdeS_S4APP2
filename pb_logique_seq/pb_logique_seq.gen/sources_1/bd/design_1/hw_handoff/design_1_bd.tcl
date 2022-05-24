@@ -235,7 +235,6 @@ proc create_hier_cell_M9_codeur_i2s { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.C_OPERATION {or} \
    CONFIG.C_SIZE {1} \
-   CONFIG.LOGO_FILE {data/sym_orgate.png} \
  ] $util_vector_logic_0
 
   # Create instance: xlconcat_0, and set properties

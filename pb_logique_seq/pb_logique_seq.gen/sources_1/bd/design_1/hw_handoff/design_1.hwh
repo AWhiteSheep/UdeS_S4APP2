@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue May 24 11:46:53 2022" VIVADOVERSION="2020.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue May 24 12:49:57 2022" VIVADOVERSION="2020.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="digilentinc.com:zybo-z7-10:part0:1.0" DEVICE="7z010" NAME="design_1" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -76,7 +76,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="const_CLK_Hz" VALUE="100000000"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_affhexPmodSSD_v3_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_M10_conversion_affichage_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -111,7 +111,7 @@
     <MODULE COREREVISION="1" FULLNAME="/M1_decodeur_i2s/MEF_decodeur_i2s" HWVERSION="1.0" INSTANCE="M1_decodeur_i2s_MEF_decodeur_i2s" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="mef_decod_i2s_v1b" VLNV="xilinx.com:module_ref:mef_decod_i2s_v1b:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_mef_decod_i2s_v1b_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_MEF_decodeur_i2s_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -170,7 +170,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="nbits" VALUE="7"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_compteur_nbits_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_compteur_7bits_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -200,7 +200,7 @@
     <MODULE COREREVISION="1" FULLNAME="/M1_decodeur_i2s/registre_24bits_droite" HWVERSION="1.0" INSTANCE="M1_decodeur_i2s_registre_24bits_droite" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="reg_24b" VLNV="xilinx.com:module_ref:reg_24b:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_reg_24b_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_registre_24bits_droite_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -238,7 +238,7 @@
     <MODULE COREREVISION="1" FULLNAME="/M1_decodeur_i2s/registre_24bits_gauche" HWVERSION="1.0" INSTANCE="M1_decodeur_i2s_registre_24bits_gauche" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="reg_24b" VLNV="xilinx.com:module_ref:reg_24b:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_reg_24b_0_1"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_registre_24bits_gauche_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -273,7 +273,7 @@
     <MODULE COREREVISION="1" FULLNAME="/M1_decodeur_i2s/registre_decalage_24bits" HWVERSION="1.0" INSTANCE="M1_decodeur_i2s_registre_decalage_24bits" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="reg_dec_24b" VLNV="xilinx.com:module_ref:reg_dec_24b:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_reg_dec_24b_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_registre_decalage_24bits_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -312,7 +312,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="c_ech_u24_max" VALUE="0x7FFFFF"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_sig_fct_sat_dure_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_M2_fonction_distortion_dure1_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -333,7 +333,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="c_ech_u24_max" VALUE="0x1FFFFF"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_sig_fct_sat_dure_0_1"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_M3_fonction_distorsion_dure2_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -353,7 +353,7 @@
     <MODULE COREREVISION="1" FULLNAME="/M4_fonction3" HWVERSION="1.0" INSTANCE="M4_fonction3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="sig_fct_3" VLNV="xilinx.com:module_ref:sig_fct_3:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_sig_fct_3_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_M4_fonction3_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -373,7 +373,7 @@
     <MODULE COREREVISION="1" FULLNAME="/M5_parametre_1" HWVERSION="1.0" INSTANCE="M5_parametre_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="calcul_param_1" VLNV="xilinx.com:module_ref:calcul_param_1:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_calcul_param_1_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_M5_parametre_1_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -408,7 +408,7 @@
     <MODULE COREREVISION="1" FULLNAME="/M6_parametre_2" HWVERSION="1.0" INSTANCE="M6_parametre_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="calcul_param_2" VLNV="xilinx.com:module_ref:calcul_param_2:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_calcul_param_2_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_M6_parametre_2_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -443,7 +443,7 @@
     <MODULE COREREVISION="1" FULLNAME="/M7_parametre_3" HWVERSION="1.0" INSTANCE="M7_parametre_3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="calcul_param_3" VLNV="xilinx.com:module_ref:calcul_param_3:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_calcul_param_3_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_M7_parametre_3_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -480,7 +480,7 @@
       <PARAMETERS>
         <PARAMETER NAME="nbtn" VALUE="2"/>
         <PARAMETER NAME="mode_simulation" VALUE="&quot;0&quot;"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_module_commande_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_M8_commande_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -537,7 +537,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="nbits" VALUE="7"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_compteur_nbits_0_1"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_compteur_nbits_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -881,7 +881,7 @@
       <PARAMETERS>
         <PARAMETER NAME="CONST_WIDTH" VALUE="1"/>
         <PARAMETER NAME="CONST_VAL" VALUE="0x1"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_xlconstant_0_1"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_xlconstant_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -921,7 +921,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="input_length" VALUE="24"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_mux4_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_Multiplexeur_choix_fonction_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -965,7 +965,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="input_length" VALUE="8"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_mux4_0_1"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_Multiplexeur_choix_parametre_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -1008,7 +1008,7 @@
       <PARAMETERS>
         <PARAMETER NAME="CONST_WIDTH" VALUE="8"/>
         <PARAMETER NAME="CONST_VAL" VALUE="0x00"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_xlconstant_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_parametre_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
