@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.551248",
-   "Default View_TopLeft":"-131,-24",
+   "Default View_ScaleFactor":"0.510483",
+   "Default View_TopLeft":"-133,-51",
    "ExpandedHierarchyInLayout":"",
    "comment_1":"Modules à modifier:
 MEF_decodeur_i2s (dans M1_decodeur_i2s)
@@ -27,7 +27,6 @@ preplace portBus o_sel_par -pg 1 -lvl 7 -x 1960 -y 670 -defaultsOSRD
 preplace portBus o_sel_fct -pg 1 -lvl 7 -x 1960 -y 650 -defaultsOSRD
 preplace inst M1_decodeur_i2s -pg 1 -lvl 1 -x 150 -y 280 -defaultsOSRD
 preplace inst M9_codeur_i2s -pg 1 -lvl 6 -x 1810 -y 770 -defaultsOSRD
-preplace inst M10_conversion_affichage -pg 1 -lvl 6 -x 1810 -y 560 -defaultsOSRD
 preplace inst M7_parametre_3 -pg 1 -lvl 4 -x 1140 -y 400 -defaultsOSRD
 preplace inst Multiplexeur_choix_fonction -pg 1 -lvl 3 -x 790 -y 90 -defaultsOSRD
 preplace inst Multiplexeur_choix_parametre -pg 1 -lvl 5 -x 1480 -y 380 -defaultsOSRD
@@ -35,9 +34,10 @@ preplace inst M4_fonction3 -pg 1 -lvl 2 -x 460 -y 520 -defaultsOSRD
 preplace inst M2_fonction_distortion_dure1 -pg 1 -lvl 2 -x 460 -y 320 -defaultsOSRD
 preplace inst M3_fonction_distorsion_dure2 -pg 1 -lvl 2 -x 460 -y 420 -defaultsOSRD
 preplace inst parametre_0 -pg 1 -lvl 4 -x 1140 -y 530 -defaultsOSRD
-preplace inst M5_parametre_1 -pg 1 -lvl 4 -x 1140 -y 80 -defaultsOSRD
-preplace inst M8_commande -pg 1 -lvl 5 -x 1480 -y 600 -defaultsOSRD
 preplace inst M6_parametre_2 -pg 1 -lvl 4 -x 1140 -y 240 -defaultsOSRD
+preplace inst M10_conversion_affichage -pg 1 -lvl 6 -x 1810 -y 560 -defaultsOSRD
+preplace inst M8_commande -pg 1 -lvl 5 -x 1480 -y 600 -defaultsOSRD
+preplace inst M5_parametre_1 -pg 1 -lvl 4 -x 1140 -y 80 -defaultsOSRD
 preplace netloc sig_fct_sat_dure_0_o_ech_fct 1 2 1 610 70n
 preplace netloc sig_fct_sat_dure_1_o_ech_fct 1 2 1 620 90n
 preplace netloc sig_fct_3_0_o_ech_fct 1 2 1 630 110n
@@ -69,7 +69,7 @@ pagesize -pg 1 -db -bbox -sgen -140 -10 2110 860
    "linktotype_comment_1":"bd_design"
 }
 {
-   """""""""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""""""":"1"
+   """"""""""""""""""""""""""""""""""da_clkrst_cnt"""""""""""""""""""""""""""""""""":"1"
 }
 {
    "/comment_1":"comment_1",

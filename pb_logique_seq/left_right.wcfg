@@ -3,61 +3,70 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="simul_module_sig_tb_behav.wdb" id="1">
+      <db_ref path="M6_M5_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="glbl" />
-            <top_module name="simul_module_sig_tb" />
+            <top_module name="M6_M5_tb" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="988686410fs"></ZoomStartTime>
-      <ZoomEndTime time="991694411fs"></ZoomEndTime>
-      <Cursor1Time time="990086410fs"></Cursor1Time>
+      <ZoomStartTime time="134407980fs"></ZoomStartTime>
+      <ZoomEndTime time="294207981fs"></ZoomEndTime>
+      <Cursor1Time time="2401000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="166"></NameColumnWidth>
-      <ValueColumnWidth column_width="87"></ValueColumnWidth>
+      <ValueColumnWidth column_width="79"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="8" />
-   <wvobject type="logic" fp_name="/simul_module_sig_tb/UUT_decodeur/i_lrc">
-      <obj_property name="ElementShortName">i_lrc</obj_property>
-      <obj_property name="ObjectShortName">i_lrc</obj_property>
+   <WVObjectSize size="12" />
+   <wvobject type="group" fp_name="group59">
+      <obj_property name="label">decodeur</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/simul_module_sig_tb/d_val_ech_L">
-      <obj_property name="ElementShortName">d_val_ech_L[23:0]</obj_property>
-      <obj_property name="ObjectShortName">d_val_ech_L[23:0]</obj_property>
-      <obj_property name="CustomSignalColor">#0000FF</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
+   <wvobject type="group" fp_name="group61">
+      <obj_property name="label">parametre</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/simul_module_sig_tb/UUT_decodeur/o_dat_left">
-      <obj_property name="ElementShortName">o_dat_left[23:0]</obj_property>
-      <obj_property name="ObjectShortName">o_dat_left[23:0]</obj_property>
-      <obj_property name="CustomSignalColor">#0000FF</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
+   <wvobject type="logic" fp_name="/M6_M5_tb/UUT_M5/i_en">
+      <obj_property name="ElementShortName">i_en</obj_property>
+      <obj_property name="ObjectShortName">i_en</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/simul_module_sig_tb/d_val_ech_R">
-      <obj_property name="ElementShortName">d_val_ech_R[23:0]</obj_property>
-      <obj_property name="ObjectShortName">d_val_ech_R[23:0]</obj_property>
-      <obj_property name="CustomSignalColor">#FF0000</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
+   <wvobject type="array" fp_name="/M6_M5_tb/UUT_M5/i_ech">
+      <obj_property name="ElementShortName">i_ech[23:0]</obj_property>
+      <obj_property name="ObjectShortName">i_ech[23:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/simul_module_sig_tb/UUT_decodeur/o_dat_right">
-      <obj_property name="ElementShortName">o_dat_right[23:0]</obj_property>
-      <obj_property name="ObjectShortName">o_dat_right[23:0]</obj_property>
-      <obj_property name="CustomSignalColor">#FF0000</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
+   <wvobject type="array" fp_name="/M6_M5_tb/UUT_M5/o_param">
+      <obj_property name="ElementShortName">o_param[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_param[7:0]</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/simul_module_sig_tb/UUT_decodeur/MEF_decodeur_i2s/U0/fsm_EtatCourant">
-      <obj_property name="ElementShortName">fsm_EtatCourant</obj_property>
-      <obj_property name="ObjectShortName">fsm_EtatCourant</obj_property>
+   <wvobject type="logic" fp_name="/M6_M5_tb/UUT_M5/signe_initial">
+      <obj_property name="ElementShortName">signe_initial</obj_property>
+      <obj_property name="ObjectShortName">signe_initial</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/simul_module_sig_tb/UUT_decodeur/MEF_decodeur_i2s/U0/fsm_prochainEtat">
-      <obj_property name="ElementShortName">fsm_prochainEtat</obj_property>
-      <obj_property name="ObjectShortName">fsm_prochainEtat</obj_property>
+   <wvobject type="logic" fp_name="/M6_M5_tb/UUT_M5/first_received">
+      <obj_property name="ElementShortName">first_received</obj_property>
+      <obj_property name="ObjectShortName">first_received</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/simul_module_sig_tb/UUT_decodeur/MEF_decodeur_i2s/i_cpt_bits">
-      <obj_property name="ElementShortName">i_cpt_bits[6:0]</obj_property>
-      <obj_property name="ObjectShortName">i_cpt_bits[6:0]</obj_property>
+   <wvobject type="logic" fp_name="/M6_M5_tb/UUT_M5/en_compteur">
+      <obj_property name="ElementShortName">en_compteur</obj_property>
+      <obj_property name="ObjectShortName">en_compteur</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/M6_M5_tb/UUT_M5/p1_counter">
+      <obj_property name="ElementShortName">p1_counter</obj_property>
+      <obj_property name="ObjectShortName">p1_counter</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/M6_M5_tb/UUT_M5/noise">
+      <obj_property name="ElementShortName">noise</obj_property>
+      <obj_property name="ObjectShortName">noise</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/M6_M5_tb/UUT_M5/mef_EtatCourant">
+      <obj_property name="ElementShortName">mef_EtatCourant</obj_property>
+      <obj_property name="ObjectShortName">mef_EtatCourant</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/M6_M5_tb/UUT_M5/mef_EtatProchain">
+      <obj_property name="ElementShortName">mef_EtatProchain</obj_property>
+      <obj_property name="ObjectShortName">mef_EtatProchain</obj_property>
    </wvobject>
 </wave_config>

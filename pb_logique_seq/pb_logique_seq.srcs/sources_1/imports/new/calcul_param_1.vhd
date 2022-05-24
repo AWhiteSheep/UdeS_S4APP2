@@ -50,12 +50,24 @@ architecture Behavioral of calcul_param_1 is
 ---------------------------------------------------------------------------------
 -- Signaux
 ----------------------------------------------------------------------------------
-    signal signe_initial, first_received : std_logic := '0';
-    type mef_etat is (et_att, et_cpt_1, et_cpt_2, et_fin);
+    type mef_etat is (
+        et_init,
+        et_att, 
+        et_cpt_1, 
+        et_cpt_2, 
+        et_fin
+    );
     signal mef_EtatCourant, mef_EtatProchain: mef_etat;
+    
+    signal signe_initial, first_received : std_logic := '0';
     signal en_compteur: std_logic := '0';
-    signal p1_counter, noise: integer := 0;
-    constant NOISE_TOLERANCE: integer := 6;
+    signal noise: integer := 0;
+    signal was_noise: integer := 0;
+    signal p1_counter : std_logic_vector(7 downto 0) := (others => '0');
+    constant NOISE_TOLERANCE: integer := 3;
+    
+    type anti_noise is array (2 downto 0) of integer range 0 to 3;
+    signal s_anti_noise : anti_noise;
     
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
@@ -66,27 +78,26 @@ begin
     process (i_bclk, i_reset)
     begin
         if (i_reset = '1') then
-            -- reset le enable du compteur
---            en_compteur <= '0';
+            -- reset le enable du compteur--            
             -- reset le compteur
-            p1_counter <= 0;
+            p1_counter <= "00000000";
             -- reset le first_receive égale �  0
-            first_received <= '0';
-            mef_EtatCourant <= et_att;
+            mef_EtatCourant <= et_init;
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
             mef_EtatCourant <= mef_EtatProchain;
             if (en_compteur = '1') then
-                p1_counter <= p1_counter + 1;
+                p1_counter <= p1_counter + 1 + was_noise;
             else
-                p1_counter <= 0;
+                p1_counter <= "00000000";
             end if;
         end if;
     end process;
     
     process(mef_EtatCourant, i_ech)
     begin
-        mef_EtatProchain <= mef_EtatCourant;
         case(mef_EtatCourant) is
+            when et_init =>
+                mef_EtatProchain <= et_att;
             when et_att =>
                 if (first_received = '0') then
                     if(signe_initial = i_ech(23)) then
@@ -127,32 +138,43 @@ begin
                     noise <= 0;
                 end if;
             when et_fin =>
+                first_received <= '0';
                 mef_EtatProchain <= et_att;
             when others =>
                 first_received <= '0';
         end case;
     end process;
     
+    process(noise)
+    begin
+        s_anti_noise(0) <= s_anti_noise(1); 
+        s_anti_noise(1) <= s_anti_noise(2); 
+        s_anti_noise(2) <= noise;
+        
+        if(s_anti_noise(0) < 4 and s_anti_noise(0) > 0 and s_anti_noise(1) = 0 and s_anti_noise(2) > 0) then 
+            was_noise <= s_anti_noise(0) + s_anti_noise(2) + NOISE_TOLERANCE + NOISE_TOLERANCE + NOISE_TOLERANCE + NOISE_TOLERANCE;
+        else
+            was_noise <= 0;
+        end if;
+    end process;
+    
+    
     process(mef_EtatCourant)
     begin
         case(mef_EtatCourant) is
+            when et_init =>
+                en_compteur <= '0';
             when et_att =>                
                 en_compteur <= '0';
-                first_received <= '0';
             when et_cpt_1 | et_cpt_2 =>            
                 -- enable le compteur
                 en_compteur <= '1';
-                first_received <= '1';
             when et_fin =>
                 en_compteur <= '0';
                 -- envoie �  la sortie le nombre d'échantillon sur 8 bits
-                o_param <= std_logic_vector(to_unsigned(p1_counter, o_param'length));
+                o_param <= p1_counter - "00000100";
                 -- reset le compteur
                 -- p1_counter <= 0;
-                -- reset le first_receive égale �  0
-                first_received <= '0';
-            when others =>
-                first_received <= '0';
         end case;
     end process;
  
