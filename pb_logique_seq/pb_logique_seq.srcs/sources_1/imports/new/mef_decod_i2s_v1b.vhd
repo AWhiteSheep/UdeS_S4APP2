@@ -53,7 +53,16 @@ architecture Behavioral of mef_decod_i2s_v1b is
     
    type fsm_decI2S_etats is (
          sta_init,
+         sta_reset,
+         sta_enable,
          sta_to,
+         sta_idle_g,
+         sta_idle_g_1,
+         sta_reset_1,
+         sta_enable_1,
+         sta_to_1,
+         sta_idle_d,
+         sta_idle_d_1,
          sta_fin
      ); 
        
@@ -77,31 +86,44 @@ begin
        end if;
        end if;       
    end process;
-   
-   
-  -- synch compteur codeur
-   rest_cpt: process (i_lrc, d_reclrc_prec, i_reset)
-      begin
-         o_cpt_bit_reset <= (d_reclrc_prec xor i_lrc) or i_reset;
-      end process;
       
     changement_etat: process(fsm_EtatCourant, i_lrc, i_cpt_bits)
     begin         
         case (fsm_EtatCourant) is          
           when sta_init =>
-            if(i_cpt_bits = "0011000") then 
-                fsm_prochainEtat <= sta_to;
+            fsm_prochainEtat <= sta_fin;
+          when sta_reset =>
+            fsm_prochainEtat <= sta_enable;
+          when sta_enable =>
+            if (i_cpt_bits = "0010111") then
+                fsm_prochainEtat <= sta_idle_g;
+--                fsm_prochainEtat <= sta_to;
             else
                 fsm_prochainEtat <= fsm_EtatCourant;
             end if;
+          when sta_idle_g =>
+            fsm_prochainEtat <= sta_idle_g_1;
+          when sta_idle_g_1 =>
+            fsm_prochainEtat <= sta_to;
           when sta_to =>
-            if (i_cpt_bits = "0011001") then
-                fsm_prochainEtat <= sta_fin;
+             fsm_prochainEtat <= sta_reset_1;
+          when sta_reset_1 =>
+            fsm_prochainEtat <= sta_enable_1;
+          when sta_enable_1 =>
+            if (i_cpt_bits = "0010111") then
+                fsm_prochainEtat <= sta_idle_d;
+--                fsm_prochainEtat <= sta_to_1;
             else
                 fsm_prochainEtat <= fsm_EtatCourant;
             end if;
+          when sta_idle_d =>
+            fsm_prochainEtat <= sta_idle_d_1;
+          when sta_idle_d_1 =>
+            fsm_prochainEtat <= sta_to_1;
+          when sta_to_1 =>
+                fsm_prochainEtat <= sta_fin;
           when sta_fin =>
-            fsm_prochainEtat <= sta_init;
+            fsm_prochainEtat <= sta_enable;
         when others =>     
             fsm_prochainEtat <= sta_init;
         end case;
@@ -112,19 +134,40 @@ begin
     begin    
         case (fsm_EtatCourant) is
             when sta_init =>
+                o_bit_enable     <= '0';
+                o_load_left      <= '0';
+                o_load_right     <= '0';
+                o_str_dat        <= '0';
+                o_cpt_bit_reset <= '0';
+            when sta_reset | sta_reset_1 =>
+                o_bit_enable     <= '0';
+                o_load_left      <= '0';
+                o_load_right     <= '0';
+                o_str_dat        <= '0';
+                o_cpt_bit_reset <= '1';
+            when sta_enable | sta_enable_1 => 
                 o_bit_enable     <= '1';
                 o_load_left      <= '0';
                 o_load_right     <= '0';
                 o_str_dat        <= '0';
-            when sta_to =>  
+                o_cpt_bit_reset <= '0';
+            when sta_idle_g | sta_idle_g_1 | sta_idle_d | sta_idle_d_1 =>
+                o_bit_enable     <= '0';
+                o_load_left      <= '0';
+                o_load_right     <= '0';
+                o_str_dat        <= '0';
+                o_cpt_bit_reset <= '0';
+            when sta_to | sta_to_1 =>  
                 o_bit_enable     <= '0';
                 o_load_left      <= not i_lrc;
                 o_load_right     <=  i_lrc;
                 o_str_dat        <= '0';
+                o_cpt_bit_reset <= '0';
             when sta_fin =>
                 o_bit_enable     <= '0';
                 o_load_left     <= '0';
                 o_load_right     <= '0';
+                o_cpt_bit_reset <= '1';
                 o_str_dat        <=  '1';
             when others =>
                 o_bit_enable     <= '0';
