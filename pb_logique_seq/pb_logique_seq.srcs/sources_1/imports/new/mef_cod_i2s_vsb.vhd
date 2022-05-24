@@ -120,7 +120,7 @@ begin
         when sta_d0 =>
             fsm_prochainEtat <= sta_d1;
         when sta_d1 =>
-            if(   i_cpt_bits = "010111"  ) then
+            if(i_cpt_bits = "010111") then
                 fsm_prochainEtat <= sta_d2;
             else
                 fsm_prochainEtat <= sta_d1;

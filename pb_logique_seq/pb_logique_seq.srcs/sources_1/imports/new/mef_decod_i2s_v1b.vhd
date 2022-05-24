@@ -53,10 +53,7 @@ architecture Behavioral of mef_decod_i2s_v1b is
     
    type fsm_decI2S_etats is (
          sta_init,
-         sta_to_g,
-         sta_fin_g,
-         sta_to_d,
-         sta_fin_d,
+         sta_to,
          sta_fin
      ); 
        
@@ -66,31 +63,19 @@ architecture Behavioral of mef_decod_i2s_v1b is
     
 begin
 
-    
-   -- Assignation du prochain �tat
-    prochain_etat_assign: process(i_bclk, i_reset)
-    begin
-       if (i_reset ='1') then
-           fsm_EtatCourant <= sta_init;
-       else
-       if(fsm_EtatCourant = sta_to_g) then
-           if falling_edge(i_bclk) then
-                fsm_EtatCourant <= fsm_prochainEtat;
-           end if;
-       elsif (fsm_EtatCourant = sta_to_d) then
-           if rising_edge(i_bclk) then
-                fsm_EtatCourant <= fsm_prochainEtat;
-           end if;
-       end if;
-       end if;
-    end process;
-
    -- pour detecter transitions d_ac_reclrc
-   reglrc_I2S: process (i_bclk)
+   reglrc_I2S: process (i_bclk, i_reset)
    begin
-   if i_bclk'event and (i_bclk = '1') then
-        d_reclrc_prec <= i_lrc;
-   end if;
+       if i_bclk'event and (i_bclk = '1') then
+            d_reclrc_prec <= i_lrc;        
+       end if;       
+       if (i_reset ='1') then
+             fsm_EtatCourant <= sta_init;
+       else
+       if rising_edge(i_bclk) then
+             fsm_EtatCourant <= fsm_prochainEtat;
+       end if;
+       end if;       
    end process;
    
    
@@ -104,24 +89,18 @@ begin
     begin         
         case (fsm_EtatCourant) is          
           when sta_init =>
-            fsm_prochainEtat <= sta_to_g;
-          when sta_to_g =>
-            if (i_cpt_bits = "11000") then
-                fsm_prochainEtat <= sta_fin_g;
+            if(i_cpt_bits = "0011000") then 
+                fsm_prochainEtat <= sta_to;
             else
-                fsm_prochainEtat <= sta_to_g;
+                fsm_prochainEtat <= fsm_EtatCourant;
             end if;
-          when sta_fin_g =>
-            fsm_prochainEtat <= sta_to_d;
-          when sta_to_d =>
-            if (i_cpt_bits = "11000") then
-                fsm_prochainEtat <= sta_fin_d;
+          when sta_to =>
+            if (i_cpt_bits = "0011001") then
+                fsm_prochainEtat <= sta_fin;
             else
-                fsm_prochainEtat <= sta_to_d;
+                fsm_prochainEtat <= fsm_EtatCourant;
             end if;
-          when sta_fin_d =>
-            fsm_prochainEtat <= sta_fin;
-        when sta_fin =>
+          when sta_fin =>
             fsm_prochainEtat <= sta_init;
         when others =>     
             fsm_prochainEtat <= sta_init;
@@ -132,49 +111,27 @@ begin
     etat_porte: process(fsm_EtatCourant, i_lrc)
     begin    
         case (fsm_EtatCourant) is
-          when sta_init =>
-             o_bit_enable     <= '0';
-             o_load_left      <= '0';
-             o_load_right     <= '0';
-             o_str_dat        <= '0';           
-             o_cpt_bit_reset  <= '0';
-          when sta_to_g =>
-             o_bit_enable     <= '1';
-             o_load_left      <= '1';
-             o_load_right     <= '0';
-             o_str_dat        <= '0';           
-             o_cpt_bit_reset  <= '0';     
-          when sta_fin_g =>
-             o_bit_enable     <= '0';
-             o_load_left      <= '0';
-             o_load_right     <= '0';
-             o_str_dat        <= '0';   
-             o_cpt_bit_reset  <= '1';
-          when sta_to_d =>
-             o_bit_enable     <= '1';
-             o_load_left      <= '0';
-             o_load_right     <= '1';
-             o_str_dat        <= '0';       
-             o_cpt_bit_reset  <= '0';         
-          when sta_fin_d =>
-             o_bit_enable     <= '0';
-             o_load_left      <= '0';
-             o_load_right     <= '0';
-             o_str_dat        <= '0';
-             o_cpt_bit_reset  <= '1';
-        when sta_fin =>
-            o_bit_enable     <= '0';
-            o_load_left     <= '0';
-            o_load_right     <= '0';
-            o_str_dat        <=  '1';
-             o_cpt_bit_reset  <= '1';
-        when others =>
-            o_bit_enable     <= '0';
-            o_load_left      <= '0';
-            o_load_right     <= '0';
-            o_str_dat        <= '0';
-        end case;
-    
+            when sta_init =>
+                o_bit_enable     <= '1';
+                o_load_left      <= '0';
+                o_load_right     <= '0';
+                o_str_dat        <= '0';
+            when sta_to =>  
+                o_bit_enable     <= '0';
+                o_load_left      <= not i_lrc;
+                o_load_right     <=  i_lrc;
+                o_str_dat        <= '0';
+            when sta_fin =>
+                o_bit_enable     <= '0';
+                o_load_left     <= '0';
+                o_load_right     <= '0';
+                o_str_dat        <=  '1';
+            when others =>
+                o_bit_enable     <= '0';
+                o_load_left      <= '0';
+                o_load_right     <= '0';
+                o_str_dat        <= '0';
+            end case;
     end process;        
 end Behavioral;
      -- decodage compteur avec case ...   «

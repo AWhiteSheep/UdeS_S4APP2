@@ -94,7 +94,7 @@ begin
 --            en_compteur <= '0';
 --            -- reset le compteur
 --            p2_counter <= 0;
---            -- reset le first_receive égale �  0
+--            -- reset le first_receive égale �  0
 --            first_received <= '0';
             mef_EtatCourant <= et_att;
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
@@ -149,9 +149,9 @@ begin
                 prec_ech <= "000000000000000000000000"; 
 
             when et_cmp =>            
-                noise <= 0;
+                -- noise <= 0;
             when et_fin =>
-                -- reset le first_receive égale �  0
+                -- reset le first_receive égale �  0
                 first_received <= '0';
                 -- calcul du facteur d'oublie
                 -- o_param <= std_logic_vector(to_unsigned(p2_counter, 8));

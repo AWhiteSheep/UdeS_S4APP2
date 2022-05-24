@@ -70,7 +70,7 @@ begin
 --            en_compteur <= '0';
             -- reset le compteur
             p1_counter <= 0;
-            -- reset le first_receive égale �  0
+            -- reset le first_receive égale �  0
             first_received <= '0';
             mef_EtatCourant <= et_att;
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
@@ -145,11 +145,11 @@ begin
                 first_received <= '1';
             when et_fin =>
                 en_compteur <= '0';
-                -- envoie �  la sortie le nombre d'échantillon sur 8 bits
+                -- envoie �  la sortie le nombre d'échantillon sur 8 bits
                 o_param <= std_logic_vector(to_unsigned(p1_counter, o_param'length));
                 -- reset le compteur
                 -- p1_counter <= 0;
-                -- reset le first_receive égale �  0
+                -- reset le first_receive égale �  0
                 first_received <= '0';
             when others =>
                 first_received <= '0';
