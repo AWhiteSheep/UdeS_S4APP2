@@ -52,7 +52,7 @@ architecture Behavioral of calcul_param_1 is
 ----------------------------------------------------------------------------------
     type mef_etat is (
         et_init,
-        et_att, 
+        et_att,
         et_cpt_1, 
         et_cpt_2, 
         et_fin
@@ -64,7 +64,7 @@ architecture Behavioral of calcul_param_1 is
     signal noise: integer := 0;
     signal was_noise: integer := 0;
     signal p1_counter : std_logic_vector(7 downto 0) := (others => '0');
-    constant NOISE_TOLERANCE: integer := 0;
+    constant NOISE_TOLERANCE: integer := 3;
     
     type anti_noise is array (2 downto 0) of integer range 0 to 3;
     signal s_anti_noise : anti_noise;

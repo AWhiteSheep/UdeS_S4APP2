@@ -154,7 +154,7 @@ begin
                 -- reset le first_receive égale �  0
                 first_received <= '0';
                 -- calcul du facteur d'oublie
-                -- o_param <= std_logic_vector(to_unsigned(p2_counter, 8));
+                o_param <= std_logic_vector(to_unsigned(p2_counter, 8));
 
                 prec_ech <= "000000000000000000000000"; 
             when others =>

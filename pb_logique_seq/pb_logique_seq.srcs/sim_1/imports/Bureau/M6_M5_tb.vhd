@@ -42,7 +42,7 @@ architecture Behavioral of M6_M5_tb is
 
 file inputFile : text;
 --Chemin depuis le fichier de simulation les fichiers se trouvent � la racine du projet
-constant inputFileName : string := "../../../../SignalHexa_200Hz.txt";
+constant inputFileName : string := "../../../../SignalHexa_200Hz_noise.txt";
 
 shared variable fstatus : file_open_status := NAME_ERROR;
 
@@ -148,8 +148,7 @@ begin
     ----------------------------------------------------------------------------
     
     sim_entree_D : process (s_reset, d_ac_pblrc)
-    begin
-   
+    begin   
        if(s_reset = '1') then  -- Init/reset
           compt_gen_R <= x"00";
           d_val_ech <= X"000000";
@@ -157,8 +156,7 @@ begin
        else
           if(d_ac_pblrc'event and d_ac_pblrc = '1') then
               d_val_ech <= nextInput;
-          end if;
-          
+          end if;          
        end if;
     end process;
     
