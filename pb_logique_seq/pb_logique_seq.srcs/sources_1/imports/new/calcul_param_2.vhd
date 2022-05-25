@@ -59,7 +59,7 @@ architecture Behavioral of calcul_param_2 is
     signal prec_ech : std_logic_vector (23 downto 0);
     signal greater_ech : std_logic_vector (23 downto 0);
     
-    constant NOISE_TOLERANCE : integer := 3;
+    constant NOISE_TOLERANCE : integer := 1;
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
 ---------------------------------------------------------------------------------------------

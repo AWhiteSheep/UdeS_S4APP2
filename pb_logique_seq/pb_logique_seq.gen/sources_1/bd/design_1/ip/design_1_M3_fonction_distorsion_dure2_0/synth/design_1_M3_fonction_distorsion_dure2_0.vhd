@@ -46,48 +46,47 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:module_ref:calcul_param_1:1.0
+-- IP VLNV: xilinx.com:module_ref:sig_fct_sat_dure:1.0
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY design_1_M5_parametre_1_0 IS
+ENTITY design_1_M3_fonction_distorsion_dure2_0 IS
   PORT (
-    i_bclk : IN STD_LOGIC;
-    i_reset : IN STD_LOGIC;
-    i_en : IN STD_LOGIC;
     i_ech : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    o_param : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+    o_ech_fct : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
   );
-END design_1_M5_parametre_1_0;
+END design_1_M3_fonction_distorsion_dure2_0;
 
-ARCHITECTURE design_1_M5_parametre_1_0_arch OF design_1_M5_parametre_1_0 IS
+ARCHITECTURE design_1_M3_fonction_distorsion_dure2_0_arch OF design_1_M3_fonction_distorsion_dure2_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_M5_parametre_1_0_arch: ARCHITECTURE IS "yes";
-  COMPONENT calcul_param_1 IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_M3_fonction_distorsion_dure2_0_arch: ARCHITECTURE IS "yes";
+  COMPONENT sig_fct_sat_dure IS
+    GENERIC (
+      c_ech_u24_max : UNSIGNED(23 DOWNTO 0)
+    );
     PORT (
-      i_bclk : IN STD_LOGIC;
-      i_reset : IN STD_LOGIC;
-      i_en : IN STD_LOGIC;
       i_ech : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-      o_param : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+      o_ech_fct : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
     );
-  END COMPONENT calcul_param_1;
+  END COMPONENT sig_fct_sat_dure;
+  ATTRIBUTE X_CORE_INFO : STRING;
+  ATTRIBUTE X_CORE_INFO OF design_1_M3_fonction_distorsion_dure2_0_arch: ARCHITECTURE IS "sig_fct_sat_dure,Vivado 2020.2";
+  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
+  ATTRIBUTE CHECK_LICENSE_TYPE OF design_1_M3_fonction_distorsion_dure2_0_arch : ARCHITECTURE IS "design_1_M3_fonction_distorsion_dure2_0,sig_fct_sat_dure,{}";
+  ATTRIBUTE CORE_GENERATION_INFO : STRING;
+  ATTRIBUTE CORE_GENERATION_INFO OF design_1_M3_fonction_distorsion_dure2_0_arch: ARCHITECTURE IS "design_1_M3_fonction_distorsion_dure2_0,sig_fct_sat_dure,{x_ipProduct=Vivado 2020.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=sig_fct_sat_dure,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,c_ech_u24_max=0x1FFFFF}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
-  ATTRIBUTE IP_DEFINITION_SOURCE OF design_1_M5_parametre_1_0_arch: ARCHITECTURE IS "module_ref";
-  ATTRIBUTE X_INTERFACE_INFO : STRING;
-  ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
-  ATTRIBUTE X_INTERFACE_PARAMETER OF i_reset: SIGNAL IS "XIL_INTERFACENAME i_reset, POLARITY ACTIVE_LOW, INSERT_VIP 0";
-  ATTRIBUTE X_INTERFACE_INFO OF i_reset: SIGNAL IS "xilinx.com:signal:reset:1.0 i_reset RST";
+  ATTRIBUTE IP_DEFINITION_SOURCE OF design_1_M3_fonction_distorsion_dure2_0_arch: ARCHITECTURE IS "module_ref";
 BEGIN
-  U0 : calcul_param_1
+  U0 : sig_fct_sat_dure
+    GENERIC MAP (
+      c_ech_u24_max => X"1FFFFF"
+    )
     PORT MAP (
-      i_bclk => i_bclk,
-      i_reset => i_reset,
-      i_en => i_en,
       i_ech => i_ech,
-      o_param => o_param
+      o_ech_fct => o_ech_fct
     );
-END design_1_M5_parametre_1_0_arch;
+END design_1_M3_fonction_distorsion_dure2_0_arch;

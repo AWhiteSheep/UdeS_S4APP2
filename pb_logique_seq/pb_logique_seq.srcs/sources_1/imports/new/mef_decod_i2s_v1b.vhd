@@ -82,7 +82,8 @@ begin
            if (rising_edge(i_lrc)) then
              -- droite
              fsm_EtatCourant <= sta_reset_1;
-           elsif(falling_edge(i_lrc)) then
+           end if;
+           if(falling_edge(i_lrc)) then
              -- gauche
              fsm_EtatCourant <= sta_reset;
            end if;

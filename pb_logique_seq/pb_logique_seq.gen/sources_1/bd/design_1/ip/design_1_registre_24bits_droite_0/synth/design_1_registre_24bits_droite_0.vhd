@@ -46,48 +46,56 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:module_ref:calcul_param_2:1.0
+-- IP VLNV: xilinx.com:module_ref:reg_24b:1.0
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY design_1_M6_parametre_2_0 IS
+ENTITY design_1_registre_24bits_droite_0 IS
   PORT (
-    i_bclk : IN STD_LOGIC;
+    i_clk : IN STD_LOGIC;
     i_reset : IN STD_LOGIC;
     i_en : IN STD_LOGIC;
-    i_ech : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    o_param : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+    i_dat : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+    o_dat : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
   );
-END design_1_M6_parametre_2_0;
+END design_1_registre_24bits_droite_0;
 
-ARCHITECTURE design_1_M6_parametre_2_0_arch OF design_1_M6_parametre_2_0 IS
+ARCHITECTURE design_1_registre_24bits_droite_0_arch OF design_1_registre_24bits_droite_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_M6_parametre_2_0_arch: ARCHITECTURE IS "yes";
-  COMPONENT calcul_param_2 IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_registre_24bits_droite_0_arch: ARCHITECTURE IS "yes";
+  COMPONENT reg_24b IS
     PORT (
-      i_bclk : IN STD_LOGIC;
+      i_clk : IN STD_LOGIC;
       i_reset : IN STD_LOGIC;
       i_en : IN STD_LOGIC;
-      i_ech : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-      o_param : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+      i_dat : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+      o_dat : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
     );
-  END COMPONENT calcul_param_2;
+  END COMPONENT reg_24b;
+  ATTRIBUTE X_CORE_INFO : STRING;
+  ATTRIBUTE X_CORE_INFO OF design_1_registre_24bits_droite_0_arch: ARCHITECTURE IS "reg_24b,Vivado 2020.2";
+  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
+  ATTRIBUTE CHECK_LICENSE_TYPE OF design_1_registre_24bits_droite_0_arch : ARCHITECTURE IS "design_1_registre_24bits_droite_0,reg_24b,{}";
+  ATTRIBUTE CORE_GENERATION_INFO : STRING;
+  ATTRIBUTE CORE_GENERATION_INFO OF design_1_registre_24bits_droite_0_arch: ARCHITECTURE IS "design_1_registre_24bits_droite_0,reg_24b,{x_ipProduct=Vivado 2020.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=reg_24b,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
-  ATTRIBUTE IP_DEFINITION_SOURCE OF design_1_M6_parametre_2_0_arch: ARCHITECTURE IS "module_ref";
+  ATTRIBUTE IP_DEFINITION_SOURCE OF design_1_registre_24bits_droite_0_arch: ARCHITECTURE IS "module_ref";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER OF i_reset: SIGNAL IS "XIL_INTERFACENAME i_reset, POLARITY ACTIVE_LOW, INSERT_VIP 0";
   ATTRIBUTE X_INTERFACE_INFO OF i_reset: SIGNAL IS "xilinx.com:signal:reset:1.0 i_reset RST";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF i_clk: SIGNAL IS "XIL_INTERFACENAME i_clk, ASSOCIATED_RESET i_reset, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.000, CLK_DOMAIN design_1_clk_100MHz, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF i_clk: SIGNAL IS "xilinx.com:signal:clock:1.0 i_clk CLK";
 BEGIN
-  U0 : calcul_param_2
+  U0 : reg_24b
     PORT MAP (
-      i_bclk => i_bclk,
+      i_clk => i_clk,
       i_reset => i_reset,
       i_en => i_en,
-      i_ech => i_ech,
-      o_param => o_param
+      i_dat => i_dat,
+      o_dat => o_dat
     );
-END design_1_M6_parametre_2_0_arch;
+END design_1_registre_24bits_droite_0_arch;

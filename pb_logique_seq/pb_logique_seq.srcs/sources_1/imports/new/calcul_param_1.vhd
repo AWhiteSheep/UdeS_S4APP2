@@ -64,7 +64,7 @@ architecture Behavioral of calcul_param_1 is
     signal noise: integer := 0;
     signal was_noise: integer := 0;
     signal p1_counter : std_logic_vector(7 downto 0) := (others => '0');
-    constant NOISE_TOLERANCE: integer := 3;
+    constant NOISE_TOLERANCE: integer := -1;
     
     type anti_noise is array (2 downto 0) of integer range 0 to 3;
     signal s_anti_noise : anti_noise;
@@ -152,7 +152,7 @@ begin
         s_anti_noise(2) <= noise;
         
         if(s_anti_noise(0) < 4 and s_anti_noise(0) > 0 and s_anti_noise(1) = 0 and s_anti_noise(2) > 0) then 
-            was_noise <= s_anti_noise(0) + s_anti_noise(2) + NOISE_TOLERANCE + NOISE_TOLERANCE + NOISE_TOLERANCE + NOISE_TOLERANCE;
+            was_noise <= s_anti_noise(0) + s_anti_noise(2);
         else
             was_noise <= 0;
         end if;
@@ -172,7 +172,7 @@ begin
             when et_fin =>
                 en_compteur <= '0';
                 -- envoie �  la sortie le nombre d'échantillon sur 8 bits
-                o_param <= p1_counter - "00000100";
+                o_param <= p1_counter;
                 -- reset le compteur
                 -- p1_counter <= 0;
         end case;
