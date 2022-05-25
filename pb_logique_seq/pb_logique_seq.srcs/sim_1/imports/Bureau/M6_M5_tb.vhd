@@ -42,7 +42,7 @@ architecture Behavioral of M6_M5_tb is
 
 file inputFile : text;
 --Chemin depuis le fichier de simulation les fichiers se trouvent � la racine du projet
-constant inputFileName : string := "../../../../SignalHexa_1000Hz.txt";
+constant inputFileName : string := "../../../../SignalHexa_200Hz.txt";
 
 shared variable fstatus : file_open_status := NAME_ERROR;
 

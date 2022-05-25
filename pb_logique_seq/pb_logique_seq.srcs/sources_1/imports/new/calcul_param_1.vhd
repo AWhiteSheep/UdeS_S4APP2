@@ -64,7 +64,7 @@ architecture Behavioral of calcul_param_1 is
     signal noise: integer := 0;
     signal was_noise: integer := 0;
     signal p1_counter : std_logic_vector(7 downto 0) := (others => '0');
-    constant NOISE_TOLERANCE: integer := -1;
+    constant NOISE_TOLERANCE: integer := 0;
     
     type anti_noise is array (2 downto 0) of integer range 0 to 3;
     signal s_anti_noise : anti_noise;
@@ -86,9 +86,7 @@ begin
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
             mef_EtatCourant <= mef_EtatProchain;
             if (en_compteur = '1') then
-                if not (i_ech = x"0") then
-                    p1_counter <= p1_counter + 1 ;--+ was_noise;
-                end if;
+                p1_counter <= p1_counter + 1 + was_noise;
             else
                 p1_counter <= "00000000";
             end if;
@@ -104,7 +102,7 @@ begin
                 if (first_received = '0') then
                     if(signe_initial = i_ech(23)) then
                         noise <= noise + 1;
-                        if(noise > NOISE_TOLERANCE) then
+                        if(noise >= NOISE_TOLERANCE) then
                             first_received <= '1';
                             -- counter <= noise;
                             noise <= 0;
@@ -121,7 +119,7 @@ begin
                 if(signe_initial = i_ech(23)) then
                     noise <= noise + 1;
                     -- changement de signe
-                    if(noise > NOISE_TOLERANCE) then
+                    if(noise >= NOISE_TOLERANCE) then
                         mef_EtatProchain <= et_cpt_2;
                         noise <= 0;
                     end if;
@@ -132,7 +130,7 @@ begin
                 if(not signe_initial = i_ech(23)) then
                     noise <= noise + 1;
                     -- changement de signe
-                    if(noise > NOISE_TOLERANCE) then
+                    if(noise >= NOISE_TOLERANCE) then
                         mef_EtatProchain <= et_fin;
                         noise <= 0;
                     end if;
@@ -174,7 +172,7 @@ begin
             when et_fin =>
                 en_compteur <= '0';
                 -- envoie �  la sortie le nombre d'échantillon sur 8 bits
-                o_param <= p1_counter;
+                o_param <= p1_counter - NOISE_TOLERANCE;
                 -- reset le compteur
                 -- p1_counter <= 0;
         end case;
