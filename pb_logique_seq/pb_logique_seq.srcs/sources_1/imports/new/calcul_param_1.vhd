@@ -86,7 +86,9 @@ begin
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
             mef_EtatCourant <= mef_EtatProchain;
             if (en_compteur = '1') then
-                p1_counter <= p1_counter + 1 + was_noise;
+                if not (i_ech = x"0") then
+                    p1_counter <= p1_counter + 1 ;--+ was_noise;
+                end if;
             else
                 p1_counter <= "00000000";
             end if;
@@ -145,18 +147,18 @@ begin
         end case;
     end process;
     
-    process(noise)
-    begin
-        s_anti_noise(0) <= s_anti_noise(1); 
-        s_anti_noise(1) <= s_anti_noise(2); 
-        s_anti_noise(2) <= noise;
+--    process(noise)
+--    begin
+--        s_anti_noise(0) <= s_anti_noise(1); 
+--        s_anti_noise(1) <= s_anti_noise(2); 
+--        s_anti_noise(2) <= noise;
         
-        if(s_anti_noise(0) < 4 and s_anti_noise(0) > 0 and s_anti_noise(1) = 0 and s_anti_noise(2) > 0) then 
-            was_noise <= s_anti_noise(0) + s_anti_noise(2);
-        else
-            was_noise <= 0;
-        end if;
-    end process;
+--        if(s_anti_noise(0) < 4 and s_anti_noise(0) > 0 and s_anti_noise(1) = 0 and s_anti_noise(2) > 0) then 
+--            was_noise <= s_anti_noise(0) + s_anti_noise(2);
+--        else
+--            was_noise <= 0;
+--        end if;
+--    end process;
     
     
     process(mef_EtatCourant)
