@@ -1,10 +1,10 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Tue May 24 19:56:28 2022
-// Host        : DESKTOP-D593BJC running 64-bit major release  (build 9200)
+// Date        : Thu May 26 15:57:53 2022
+// Host        : DESKTOP-O3IF8HD running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               c:/github/UdeS_S4APP2/pb_logique_seq/pb_logique_seq.gen/sources_1/bd/design_1/ip/design_1_compteur_nbits_0_0_1/design_1_compteur_nbits_0_0_stub.v
+//               c:/temp_vivado/APP2/UdeS_S4APP2/pb_logique_seq/pb_logique_seq.gen/sources_1/bd/design_1/ip/design_1_compteur_nbits_0_0_1/design_1_compteur_nbits_0_0_stub.v
 // Design      : design_1_compteur_nbits_0_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z010clg400-1

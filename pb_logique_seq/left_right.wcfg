@@ -10,13 +10,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="2959333333fs"></ZoomStartTime>
-      <ZoomEndTime time="10209333334fs"></ZoomEndTime>
-      <Cursor1Time time="9001000000fs"></Cursor1Time>
+      <ZoomStartTime time="12561000000fs"></ZoomStartTime>
+      <ZoomEndTime time="14019000001fs"></ZoomEndTime>
+      <Cursor1Time time="14001000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="195"></NameColumnWidth>
-      <ValueColumnWidth column_width="108"></ValueColumnWidth>
+      <ValueColumnWidth column_width="104"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="13" />
    <wvobject fp_name="/M6_M5_tb/UUT_M6/i_bclk" type="logic">
@@ -38,12 +38,11 @@
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       <obj_property name="CellHeight">100</obj_property>
    </wvobject>
-   <wvobject fp_name="/M6_M5_tb/UUT_M6/o_param" type="array">
+   <wvobject fp_name="/M6_M5_tb/UUT_M5/o_param" type="array">
       <obj_property name="ElementShortName">o_param[7:0]</obj_property>
       <obj_property name="ObjectShortName">o_param[7:0]</obj_property>
       <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
       <obj_property name="CellHeight">100</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/M6_M5_tb/UUT_M6/integrateur" type="array">
       <obj_property name="ElementShortName">integrateur[23:0]</obj_property>

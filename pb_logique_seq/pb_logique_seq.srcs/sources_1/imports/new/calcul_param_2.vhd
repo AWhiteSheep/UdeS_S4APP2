@@ -51,7 +51,7 @@ architecture Behavioral of calcul_param_2 is
 -- Signaux
 ----------------------------------------------------------------------------------
     signal integrateur, integrateur_y: std_logic_vector(23 downto 0) := (others => '0');
-    signal integrateur_buffer: std_logic_vector(27 downto 0) := (others => '0');
+    signal integrateur_buffer: std_logic_vector(47 downto 0) := (others => '0');
     signal alpha_y: std_logic_vector(7 downto 0) := (others => '0');
     signal alpha_power_1, alpha_power_2, alpha_power_3, alpha_power_4, alpha_power_5, alpha_sum : std_logic_vector(28 downto 0) := (others => '0');
     
@@ -102,6 +102,8 @@ begin
             when et_somme_y =>
                 mef_EtatProchain_p <= et_produit;
             when et_produit =>
+                mef_EtatProchain_p <= et_integrateur_buffer;
+            when et_integrateur_buffer =>
                 mef_EtatProchain_p <= et_integrateur;
             when et_integrateur =>
                 mef_EtatProchain_p <= et_fin_p;
@@ -135,8 +137,10 @@ begin
                 alpha_sum <= std_logic_vector(signed(alpha_power_1) + signed(alpha_power_2) + signed(alpha_power_3) + signed(alpha_power_4) + signed(alpha_power_5));
             when et_produit => 
                 produit <=  std_logic_vector(signed(i_ech) * signed(i_ech));
+            when et_integrateur_buffer =>
+                integrateur_buffer <= std_logic_vector(signed(alpha_sum) + signed(produit));
             when et_integrateur =>
-                integrateur <= std_logic_vector(signed(alpha_sum) + signed(produit));
+                integrateur <= integrateur_buffer(47 downto 24);
             when et_fin_p =>
                 o_param <= integrateur(23 downto 16);
             when others =>
