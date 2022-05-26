@@ -11,30 +11,30 @@
     },
     "design_tree": {
       "M1_decodeur_i2s": {
+        "MEF_decodeur_i2s": "",
         "compteur_7bits": "",
         "registre_24bits_droite": "",
         "registre_24bits_gauche": "",
-        "registre_decalage_24bits": "",
-        "MEF_decodeur_i2s": ""
+        "registre_decalage_24bits": ""
       },
       "M9_codeur_i2s": {
-        "compteur_nbits_0": "",
-        "mux2_0": "",
-        "reg_dec_24b_fd_0": "",
         "util_vector_logic_0": "",
         "xlconcat_0": "",
         "xlconstant_0": "",
         "xlslice_0": "",
+        "compteur_nbits_0": "",
+        "mux2_0": "",
+        "reg_dec_24b_fd_0": "",
         "mef_cod_i2s_vsb_0": ""
       },
+      "parametre_0": "",
+      "M10_conversion_affichage": "",
       "M7_parametre_3": "",
       "Multiplexeur_choix_fonction": "",
       "Multiplexeur_choix_parametre": "",
       "M4_fonction3": "",
       "M2_fonction_distortion_dure1": "",
       "M3_fonction_distorsion_dure2": "",
-      "parametre_0": "",
-      "M10_conversion_affichage": "",
       "M8_commande": "",
       "M5_parametre_1": "",
       "M6_parametre_2": ""
@@ -121,204 +121,6 @@
           }
         },
         "components": {
-          "compteur_7bits": {
-            "vlnv": "xilinx.com:module_ref:compteur_nbits:1.0",
-            "xci_name": "design_1_compteur_7bits_0",
-            "xci_path": "ip\\design_1_compteur_7bits_0\\design_1_compteur_7bits_0.xci",
-            "inst_hier_path": "M1_decodeur_i2s/compteur_7bits",
-            "parameters": {
-              "nbits": {
-                "value": "7"
-              }
-            },
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "compteur_nbits",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "clk": {
-                "type": "clk",
-                "direction": "I",
-                "parameters": {
-                  "ASSOCIATED_RESET": {
-                    "value": "reset",
-                    "value_src": "constant"
-                  },
-                  "FREQ_HZ": {
-                    "value": "100000000",
-                    "value_src": "user_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "design_1_clk_100MHz",
-                    "value_src": "default_prop"
-                  }
-                }
-              },
-              "i_en": {
-                "direction": "I"
-              },
-              "reset": {
-                "type": "rst",
-                "direction": "I"
-              },
-              "o_val_cpt": {
-                "direction": "O",
-                "left": "6",
-                "right": "0"
-              }
-            }
-          },
-          "registre_24bits_droite": {
-            "vlnv": "xilinx.com:module_ref:reg_24b:1.0",
-            "xci_name": "design_1_registre_24bits_droite_0",
-            "xci_path": "ip\\design_1_registre_24bits_droite_0\\design_1_registre_24bits_droite_0.xci",
-            "inst_hier_path": "M1_decodeur_i2s/registre_24bits_droite",
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "reg_24b",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "i_clk": {
-                "type": "clk",
-                "direction": "I",
-                "parameters": {
-                  "ASSOCIATED_RESET": {
-                    "value": "i_reset",
-                    "value_src": "constant"
-                  },
-                  "FREQ_HZ": {
-                    "value": "100000000",
-                    "value_src": "user_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "design_1_clk_100MHz",
-                    "value_src": "default_prop"
-                  }
-                }
-              },
-              "i_reset": {
-                "type": "rst",
-                "direction": "I"
-              },
-              "i_en": {
-                "direction": "I"
-              },
-              "i_dat": {
-                "direction": "I",
-                "left": "23",
-                "right": "0"
-              },
-              "o_dat": {
-                "direction": "O",
-                "left": "23",
-                "right": "0"
-              }
-            }
-          },
-          "registre_24bits_gauche": {
-            "vlnv": "xilinx.com:module_ref:reg_24b:1.0",
-            "xci_name": "design_1_registre_24bits_gauche_0",
-            "xci_path": "ip\\design_1_registre_24bits_gauche_0\\design_1_registre_24bits_gauche_0.xci",
-            "inst_hier_path": "M1_decodeur_i2s/registre_24bits_gauche",
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "reg_24b",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "i_clk": {
-                "type": "clk",
-                "direction": "I",
-                "parameters": {
-                  "ASSOCIATED_RESET": {
-                    "value": "i_reset",
-                    "value_src": "constant"
-                  },
-                  "FREQ_HZ": {
-                    "value": "100000000",
-                    "value_src": "user_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "design_1_clk_100MHz",
-                    "value_src": "default_prop"
-                  }
-                }
-              },
-              "i_reset": {
-                "type": "rst",
-                "direction": "I"
-              },
-              "i_en": {
-                "direction": "I"
-              },
-              "i_dat": {
-                "direction": "I",
-                "left": "23",
-                "right": "0"
-              },
-              "o_dat": {
-                "direction": "O",
-                "left": "23",
-                "right": "0"
-              }
-            }
-          },
-          "registre_decalage_24bits": {
-            "vlnv": "xilinx.com:module_ref:reg_dec_24b:1.0",
-            "xci_name": "design_1_registre_decalage_24bits_0",
-            "xci_path": "ip\\design_1_registre_decalage_24bits_0\\design_1_registre_decalage_24bits_0.xci",
-            "inst_hier_path": "M1_decodeur_i2s/registre_decalage_24bits",
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "reg_dec_24b",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "i_clk": {
-                "type": "clk",
-                "direction": "I",
-                "parameters": {
-                  "ASSOCIATED_RESET": {
-                    "value": "i_reset",
-                    "value_src": "constant"
-                  },
-                  "FREQ_HZ": {
-                    "value": "100000000",
-                    "value_src": "user_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "design_1_clk_100MHz",
-                    "value_src": "default_prop"
-                  }
-                }
-              },
-              "i_reset": {
-                "type": "rst",
-                "direction": "I"
-              },
-              "i_load": {
-                "direction": "I"
-              },
-              "i_en": {
-                "direction": "I"
-              },
-              "i_dat_bit": {
-                "direction": "I"
-              },
-              "i_dat_load": {
-                "direction": "I",
-                "left": "23",
-                "right": "0"
-              },
-              "o_dat": {
-                "direction": "O",
-                "left": "23",
-                "right": "0"
-              }
-            }
-          },
           "MEF_decodeur_i2s": {
             "vlnv": "xilinx.com:module_ref:mef_decod_i2s_v1b:1.0",
             "xci_name": "design_1_MEF_decodeur_i2s_0",
@@ -376,6 +178,172 @@
                 "direction": "O"
               }
             }
+          },
+          "compteur_7bits": {
+            "vlnv": "xilinx.com:module_ref:compteur_nbits:1.0",
+            "xci_name": "design_1_compteur_7bits_0",
+            "xci_path": "ip\\design_1_compteur_7bits_0\\design_1_compteur_7bits_0.xci",
+            "inst_hier_path": "M1_decodeur_i2s/compteur_7bits",
+            "parameters": {
+              "nbits": {
+                "value": "7"
+              }
+            },
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "compteur_nbits",
+              "boundary_crc": "0x0"
+            },
+            "ports": {
+              "clk": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_RESET": {
+                    "value": "reset",
+                    "value_src": "constant"
+                  }
+                }
+              },
+              "i_en": {
+                "direction": "I"
+              },
+              "reset": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "o_val_cpt": {
+                "direction": "O",
+                "left": "6",
+                "right": "0"
+              }
+            }
+          },
+          "registre_24bits_droite": {
+            "vlnv": "xilinx.com:module_ref:reg_24b:1.0",
+            "xci_name": "design_1_registre_24bits_droite_0",
+            "xci_path": "ip\\design_1_registre_24bits_droite_0\\design_1_registre_24bits_droite_0.xci",
+            "inst_hier_path": "M1_decodeur_i2s/registre_24bits_droite",
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "reg_24b",
+              "boundary_crc": "0x0"
+            },
+            "ports": {
+              "i_clk": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_RESET": {
+                    "value": "i_reset",
+                    "value_src": "constant"
+                  }
+                }
+              },
+              "i_reset": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "i_en": {
+                "direction": "I"
+              },
+              "i_dat": {
+                "direction": "I",
+                "left": "23",
+                "right": "0"
+              },
+              "o_dat": {
+                "direction": "O",
+                "left": "23",
+                "right": "0"
+              }
+            }
+          },
+          "registre_24bits_gauche": {
+            "vlnv": "xilinx.com:module_ref:reg_24b:1.0",
+            "xci_name": "design_1_registre_24bits_gauche_0",
+            "xci_path": "ip\\design_1_registre_24bits_gauche_0\\design_1_registre_24bits_gauche_0.xci",
+            "inst_hier_path": "M1_decodeur_i2s/registre_24bits_gauche",
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "reg_24b",
+              "boundary_crc": "0x0"
+            },
+            "ports": {
+              "i_clk": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_RESET": {
+                    "value": "i_reset",
+                    "value_src": "constant"
+                  }
+                }
+              },
+              "i_reset": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "i_en": {
+                "direction": "I"
+              },
+              "i_dat": {
+                "direction": "I",
+                "left": "23",
+                "right": "0"
+              },
+              "o_dat": {
+                "direction": "O",
+                "left": "23",
+                "right": "0"
+              }
+            }
+          },
+          "registre_decalage_24bits": {
+            "vlnv": "xilinx.com:module_ref:reg_dec_24b:1.0",
+            "xci_name": "design_1_registre_decalage_24bits_0",
+            "xci_path": "ip\\design_1_registre_decalage_24bits_0\\design_1_registre_decalage_24bits_0.xci",
+            "inst_hier_path": "M1_decodeur_i2s/registre_decalage_24bits",
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "reg_dec_24b",
+              "boundary_crc": "0x0"
+            },
+            "ports": {
+              "i_clk": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_RESET": {
+                    "value": "i_reset",
+                    "value_src": "constant"
+                  }
+                }
+              },
+              "i_reset": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "i_load": {
+                "direction": "I"
+              },
+              "i_en": {
+                "direction": "I"
+              },
+              "i_dat_bit": {
+                "direction": "I"
+              },
+              "i_dat_load": {
+                "direction": "I",
+                "left": "23",
+                "right": "0"
+              },
+              "o_dat": {
+                "direction": "O",
+                "left": "23",
+                "right": "0"
+              }
+            }
           }
         },
         "nets": {
@@ -419,11 +387,11 @@
           "clk_1": {
             "ports": [
               "clk",
+              "MEF_decodeur_i2s/i_bclk",
               "compteur_7bits/clk",
               "registre_24bits_droite/i_clk",
               "registre_24bits_gauche/i_clk",
-              "registre_decalage_24bits/i_clk",
-              "MEF_decodeur_i2s/i_bclk"
+              "registre_decalage_24bits/i_clk"
             ]
           },
           "mef_decod_i2s_v1b_0_o_cpt_bit_reset": {
@@ -460,10 +428,10 @@
           "i_reset_1": {
             "ports": [
               "i_reset",
+              "MEF_decodeur_i2s/i_reset",
               "registre_24bits_droite/i_reset",
               "registre_24bits_gauche/i_reset",
-              "registre_decalage_24bits/i_reset",
-              "MEF_decodeur_i2s/i_reset"
+              "registre_decalage_24bits/i_reset"
             ]
           }
         }
@@ -497,157 +465,6 @@
           }
         },
         "components": {
-          "compteur_nbits_0": {
-            "vlnv": "xilinx.com:module_ref:compteur_nbits:1.0",
-            "xci_name": "design_1_compteur_nbits_0_0",
-            "xci_path": "ip\\design_1_compteur_nbits_0_0_1\\design_1_compteur_nbits_0_0.xci",
-            "inst_hier_path": "M9_codeur_i2s/compteur_nbits_0",
-            "parameters": {
-              "nbits": {
-                "value": "7"
-              }
-            },
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "compteur_nbits",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "clk": {
-                "type": "clk",
-                "direction": "I",
-                "parameters": {
-                  "ASSOCIATED_RESET": {
-                    "value": "reset",
-                    "value_src": "constant"
-                  },
-                  "FREQ_HZ": {
-                    "value": "100000000",
-                    "value_src": "user_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "design_1_clk_100MHz",
-                    "value_src": "default_prop"
-                  }
-                }
-              },
-              "i_en": {
-                "direction": "I"
-              },
-              "reset": {
-                "type": "rst",
-                "direction": "I"
-              },
-              "o_val_cpt": {
-                "direction": "O",
-                "left": "6",
-                "right": "0"
-              }
-            }
-          },
-          "mux2_0": {
-            "vlnv": "xilinx.com:module_ref:mux2:1.0",
-            "xci_name": "design_1_mux2_0_0",
-            "xci_path": "ip\\design_1_mux2_0_0_1\\design_1_mux2_0_0.xci",
-            "inst_hier_path": "M9_codeur_i2s/mux2_0",
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "mux2",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "sel": {
-                "direction": "I",
-                "left": "1",
-                "right": "0",
-                "parameters": {
-                  "PortWidth": {
-                    "value": "2",
-                    "value_src": "ip_prop"
-                  }
-                }
-              },
-              "input1": {
-                "direction": "I",
-                "left": "23",
-                "right": "0"
-              },
-              "input2": {
-                "direction": "I",
-                "left": "23",
-                "right": "0"
-              },
-              "output0": {
-                "direction": "O",
-                "left": "23",
-                "right": "0"
-              }
-            }
-          },
-          "reg_dec_24b_fd_0": {
-            "vlnv": "xilinx.com:module_ref:reg_dec_24b_fd:1.0",
-            "xci_name": "design_1_reg_dec_24b_fd_0_0",
-            "xci_path": "ip\\design_1_reg_dec_24b_fd_0_0_1\\design_1_reg_dec_24b_fd_0_0.xci",
-            "inst_hier_path": "M9_codeur_i2s/reg_dec_24b_fd_0",
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "reg_dec_24b_fd",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "i_clk": {
-                "type": "clk",
-                "direction": "I",
-                "parameters": {
-                  "ASSOCIATED_RESET": {
-                    "value": "i_reset",
-                    "value_src": "constant"
-                  },
-                  "FREQ_HZ": {
-                    "value": "100000000",
-                    "value_src": "user_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "design_1_clk_100MHz",
-                    "value_src": "default_prop"
-                  }
-                }
-              },
-              "i_reset": {
-                "type": "rst",
-                "direction": "I"
-              },
-              "i_load": {
-                "direction": "I",
-                "parameters": {
-                  "PortType": {
-                    "value": "undef",
-                    "value_src": "ip_prop"
-                  },
-                  "PortType.PROP_SRC": {
-                    "value": "false",
-                    "value_src": "ip_prop"
-                  }
-                }
-              },
-              "i_en": {
-                "direction": "I"
-              },
-              "i_dat_bit": {
-                "direction": "I"
-              },
-              "i_dat_load": {
-                "direction": "I",
-                "left": "23",
-                "right": "0"
-              },
-              "o_dat": {
-                "direction": "O",
-                "left": "23",
-                "right": "0"
-              }
-            }
-          },
           "util_vector_logic_0": {
             "vlnv": "xilinx.com:ip:util_vector_logic:2.0",
             "xci_name": "design_1_util_vector_logic_0_0",
@@ -694,6 +511,125 @@
               }
             }
           },
+          "compteur_nbits_0": {
+            "vlnv": "xilinx.com:module_ref:compteur_nbits:1.0",
+            "xci_name": "design_1_compteur_nbits_0_0",
+            "xci_path": "ip\\design_1_compteur_nbits_0_0_1\\design_1_compteur_nbits_0_0.xci",
+            "inst_hier_path": "M9_codeur_i2s/compteur_nbits_0",
+            "parameters": {
+              "nbits": {
+                "value": "7"
+              }
+            },
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "compteur_nbits",
+              "boundary_crc": "0x0"
+            },
+            "ports": {
+              "clk": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_RESET": {
+                    "value": "reset",
+                    "value_src": "constant"
+                  }
+                }
+              },
+              "i_en": {
+                "direction": "I"
+              },
+              "reset": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "o_val_cpt": {
+                "direction": "O",
+                "left": "6",
+                "right": "0"
+              }
+            }
+          },
+          "mux2_0": {
+            "vlnv": "xilinx.com:module_ref:mux2:1.0",
+            "xci_name": "design_1_mux2_0_0",
+            "xci_path": "ip\\design_1_mux2_0_0_1\\design_1_mux2_0_0.xci",
+            "inst_hier_path": "M9_codeur_i2s/mux2_0",
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "mux2",
+              "boundary_crc": "0x0"
+            },
+            "ports": {
+              "sel": {
+                "direction": "I",
+                "left": "1",
+                "right": "0"
+              },
+              "input1": {
+                "direction": "I",
+                "left": "23",
+                "right": "0"
+              },
+              "input2": {
+                "direction": "I",
+                "left": "23",
+                "right": "0"
+              },
+              "output0": {
+                "direction": "O",
+                "left": "23",
+                "right": "0"
+              }
+            }
+          },
+          "reg_dec_24b_fd_0": {
+            "vlnv": "xilinx.com:module_ref:reg_dec_24b_fd:1.0",
+            "xci_name": "design_1_reg_dec_24b_fd_0_0",
+            "xci_path": "ip\\design_1_reg_dec_24b_fd_0_0_1\\design_1_reg_dec_24b_fd_0_0.xci",
+            "inst_hier_path": "M9_codeur_i2s/reg_dec_24b_fd_0",
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "reg_dec_24b_fd",
+              "boundary_crc": "0x0"
+            },
+            "ports": {
+              "i_clk": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_RESET": {
+                    "value": "i_reset",
+                    "value_src": "constant"
+                  }
+                }
+              },
+              "i_reset": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "i_load": {
+                "direction": "I"
+              },
+              "i_en": {
+                "direction": "I"
+              },
+              "i_dat_bit": {
+                "direction": "I"
+              },
+              "i_dat_load": {
+                "direction": "I",
+                "left": "23",
+                "right": "0"
+              },
+              "o_dat": {
+                "direction": "O",
+                "left": "23",
+                "right": "0"
+              }
+            }
+          },
           "mef_cod_i2s_vsb_0": {
             "vlnv": "xilinx.com:module_ref:mef_cod_i2s_vsb:1.0",
             "xci_name": "design_1_mef_cod_i2s_vsb_0_0",
@@ -706,21 +642,7 @@
             },
             "ports": {
               "i_bclk": {
-                "direction": "I",
-                "parameters": {
-                  "FREQ_HZ": {
-                    "value": "100000000",
-                    "value_src": "user_prop"
-                  },
-                  "PHASE": {
-                    "value": "0.000",
-                    "value_src": "default_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "design_1_clk_100MHz",
-                    "value_src": "default_prop"
-                  }
-                }
+                "direction": "I"
               },
               "i_reset": {
                 "type": "rst",
@@ -738,30 +660,10 @@
                 "direction": "O"
               },
               "o_load_left": {
-                "direction": "O",
-                "parameters": {
-                  "PortType": {
-                    "value": "undef",
-                    "value_src": "ip_prop"
-                  },
-                  "PortType.PROP_SRC": {
-                    "value": "false",
-                    "value_src": "ip_prop"
-                  }
-                }
+                "direction": "O"
               },
               "o_load_right": {
-                "direction": "O",
-                "parameters": {
-                  "PortType": {
-                    "value": "undef",
-                    "value_src": "ip_prop"
-                  },
-                  "PortType.PROP_SRC": {
-                    "value": "false",
-                    "value_src": "ip_prop"
-                  }
-                }
+                "direction": "O"
               },
               "o_cpt_bit_reset": {
                 "type": "rst",
@@ -875,6 +777,70 @@
           }
         }
       },
+      "parametre_0": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "xci_name": "design_1_parametre_0_0",
+        "xci_path": "ip\\design_1_parametre_0_0\\design_1_parametre_0_0.xci",
+        "inst_hier_path": "parametre_0",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "0"
+          },
+          "CONST_WIDTH": {
+            "value": "8"
+          }
+        }
+      },
+      "M10_conversion_affichage": {
+        "vlnv": "xilinx.com:module_ref:affhexPmodSSD_v3:1.0",
+        "xci_name": "design_1_M10_conversion_affichage_0",
+        "xci_path": "ip\\design_1_M10_conversion_affichage_0\\design_1_M10_conversion_affichage_0.xci",
+        "inst_hier_path": "M10_conversion_affichage",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "affhexPmodSSD_v3",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "reset",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_100MHz",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "DA": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "i_btn": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "JPmod": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          }
+        }
+      },
       "M7_parametre_3": {
         "vlnv": "xilinx.com:module_ref:calcul_param_3:1.0",
         "xci_name": "design_1_M7_parametre_3_0",
@@ -887,21 +853,7 @@
         },
         "ports": {
           "i_bclk": {
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "user_prop"
-              },
-              "PHASE": {
-                "value": "0.000",
-                "value_src": "default_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "design_1_clk_100MHz",
-                "value_src": "default_prop"
-              }
-            }
+            "direction": "I"
           },
           "i_reset": {
             "type": "rst",
@@ -1087,70 +1039,6 @@
           }
         }
       },
-      "parametre_0": {
-        "vlnv": "xilinx.com:ip:xlconstant:1.1",
-        "xci_name": "design_1_parametre_0_0",
-        "xci_path": "ip\\design_1_parametre_0_0\\design_1_parametre_0_0.xci",
-        "inst_hier_path": "parametre_0",
-        "parameters": {
-          "CONST_VAL": {
-            "value": "0"
-          },
-          "CONST_WIDTH": {
-            "value": "8"
-          }
-        }
-      },
-      "M10_conversion_affichage": {
-        "vlnv": "xilinx.com:module_ref:affhexPmodSSD_v3:1.0",
-        "xci_name": "design_1_M10_conversion_affichage_0",
-        "xci_path": "ip\\design_1_M10_conversion_affichage_0\\design_1_M10_conversion_affichage_0.xci",
-        "inst_hier_path": "M10_conversion_affichage",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "affhexPmodSSD_v3",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "reset",
-                "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "user_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "design_1_clk_100MHz",
-                "value_src": "default_prop"
-              }
-            }
-          },
-          "reset": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "DA": {
-            "direction": "I",
-            "left": "7",
-            "right": "0"
-          },
-          "i_btn": {
-            "direction": "I",
-            "left": "3",
-            "right": "0"
-          },
-          "JPmod": {
-            "direction": "O",
-            "left": "7",
-            "right": "0"
-          }
-        }
-      },
       "M8_commande": {
         "vlnv": "xilinx.com:module_ref:module_commande:1.0",
         "xci_name": "design_1_M8_commande_0",
@@ -1164,17 +1052,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "user_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "design_1_clk_100MHz",
-                "value_src": "default_prop"
-              }
-            }
+            "direction": "I"
           },
           "o_reset": {
             "type": "rst",
@@ -1219,21 +1097,7 @@
         },
         "ports": {
           "i_bclk": {
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "user_prop"
-              },
-              "PHASE": {
-                "value": "0.000",
-                "value_src": "default_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "design_1_clk_100MHz",
-                "value_src": "default_prop"
-              }
-            }
+            "direction": "I"
           },
           "i_reset": {
             "type": "rst",
@@ -1351,8 +1215,8 @@
           "clk_100MHz",
           "M1_decodeur_i2s/clk",
           "M9_codeur_i2s/i_bclk",
-          "M7_parametre_3/i_bclk",
           "M10_conversion_affichage/clk",
+          "M7_parametre_3/i_bclk",
           "M8_commande/clk",
           "M5_parametre_1/i_bclk",
           "M6_parametre_2/i_bclk"
@@ -1438,8 +1302,8 @@
           "M8_commande/o_reset",
           "M1_decodeur_i2s/i_reset",
           "M9_codeur_i2s/i_reset",
-          "M7_parametre_3/i_reset",
           "M10_conversion_affichage/reset",
+          "M7_parametre_3/i_reset",
           "M5_parametre_1/i_reset",
           "M6_parametre_2/i_reset"
         ]

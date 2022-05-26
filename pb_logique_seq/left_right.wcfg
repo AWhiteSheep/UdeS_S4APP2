@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="312600001fs"></ZoomEndTime>
-      <Cursor1Time time="167500000fs"></Cursor1Time>
+      <ZoomStartTime time="2959333333fs"></ZoomStartTime>
+      <ZoomEndTime time="10209333334fs"></ZoomEndTime>
+      <Cursor1Time time="9001000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="145"></NameColumnWidth>
-      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+      <NameColumnWidth column_width="195"></NameColumnWidth>
+      <ValueColumnWidth column_width="108"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="11" />
+   <WVObjectSize size="13" />
    <wvobject fp_name="/M6_M5_tb/UUT_M6/i_bclk" type="logic">
       <obj_property name="ElementShortName">i_bclk</obj_property>
       <obj_property name="ObjectShortName">i_bclk</obj_property>
@@ -34,37 +34,48 @@
    <wvobject fp_name="/M6_M5_tb/UUT_M6/i_ech" type="array">
       <obj_property name="ElementShortName">i_ech[23:0]</obj_property>
       <obj_property name="ObjectShortName">i_ech[23:0]</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/M6_M5_tb/UUT_M6/prec_ech" type="array">
-      <obj_property name="ElementShortName">prec_ech[23:0]</obj_property>
-      <obj_property name="ObjectShortName">prec_ech[23:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/M6_M5_tb/UUT_M6/greater_ech" type="array">
-      <obj_property name="ElementShortName">greater_ech[23:0]</obj_property>
-      <obj_property name="ObjectShortName">greater_ech[23:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
    </wvobject>
    <wvobject fp_name="/M6_M5_tb/UUT_M6/o_param" type="array">
       <obj_property name="ElementShortName">o_param[7:0]</obj_property>
       <obj_property name="ObjectShortName">o_param[7:0]</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/M6_M5_tb/UUT_M6/mef_EtatCourant" type="other">
-      <obj_property name="ElementShortName">mef_EtatCourant</obj_property>
-      <obj_property name="ObjectShortName">mef_EtatCourant</obj_property>
+   <wvobject fp_name="/M6_M5_tb/UUT_M6/integrateur" type="array">
+      <obj_property name="ElementShortName">integrateur[23:0]</obj_property>
+      <obj_property name="ObjectShortName">integrateur[23:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/M6_M5_tb/UUT_M6/mef_EtatProchain" type="other">
-      <obj_property name="ElementShortName">mef_EtatProchain</obj_property>
-      <obj_property name="ObjectShortName">mef_EtatProchain</obj_property>
+   <wvobject fp_name="/M6_M5_tb/UUT_M6/integrateur_y" type="array">
+      <obj_property name="ElementShortName">integrateur_y[23:0]</obj_property>
+      <obj_property name="ObjectShortName">integrateur_y[23:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/M6_M5_tb/UUT_M6/noise" type="other">
-      <obj_property name="ElementShortName">noise</obj_property>
-      <obj_property name="ObjectShortName">noise</obj_property>
+   <wvobject fp_name="/M6_M5_tb/UUT_M6/mef_EtatCourant_p" type="other">
+      <obj_property name="ElementShortName">mef_EtatCourant_p</obj_property>
+      <obj_property name="ObjectShortName">mef_EtatCourant_p</obj_property>
    </wvobject>
-   <wvobject fp_name="/M6_M5_tb/UUT_M6/greater_ech_tmp" type="array">
-      <obj_property name="ElementShortName">greater_ech_tmp[23:0]</obj_property>
-      <obj_property name="ObjectShortName">greater_ech_tmp[23:0]</obj_property>
+   <wvobject fp_name="/M6_M5_tb/UUT_M6/mef_EtatProchain_p" type="other">
+      <obj_property name="ElementShortName">mef_EtatProchain_p</obj_property>
+      <obj_property name="ObjectShortName">mef_EtatProchain_p</obj_property>
+   </wvobject>
+   <wvobject fp_name="/M6_M5_tb/UUT_M6/produit" type="array">
+      <obj_property name="ElementShortName">produit[47:0]</obj_property>
+      <obj_property name="ObjectShortName">produit[47:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/M6_M5_tb/UUT_M6/integrateur" type="array">
+      <obj_property name="ElementShortName">integrateur[23:0]</obj_property>
+      <obj_property name="ObjectShortName">integrateur[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/M6_M5_tb/UUT_M6/integrateur_y" type="array">
+      <obj_property name="ElementShortName">integrateur_y[23:0]</obj_property>
+      <obj_property name="ObjectShortName">integrateur_y[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/M6_M5_tb/UUT_M6/integrateur_buffer" type="array">
+      <obj_property name="ElementShortName">integrateur_buffer[27:0]</obj_property>
+      <obj_property name="ObjectShortName">integrateur_buffer[27:0]</obj_property>
    </wvobject>
 </wave_config>
