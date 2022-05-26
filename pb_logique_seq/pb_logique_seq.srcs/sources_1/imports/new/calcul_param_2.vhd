@@ -50,14 +50,34 @@ architecture Behavioral of calcul_param_2 is
 ---------------------------------------------------------------------------------
 -- Signaux
 ----------------------------------------------------------------------------------
+    signal integrateur, integrateur_y: std_logic_vector(23 downto 0) := (others => '0');
     signal alpha_y: std_logic_vector(7 downto 0) := (others => '0');
-    signal alpha_power_1, alpha_power_2, alpha_power_3, alpha_power_4, alpha_power_5, alpha_sum : std_logic_vector(12 downto 0) := (others => '0');
-    type mef_etat is (et_att, et_cmp, et_fin);
+    signal alpha_power_1, alpha_power_2, alpha_power_3, alpha_power_4, alpha_power_5, alpha_sum : std_logic_vector(28 downto 0) := (others => '0');
+   
+    type mef_etat is (
+        et_init,
+        et_att, 
+        et_cmp, 
+        et_fin
+    );
+    
+    type mef_etat_p is (
+        et_init_p,
+        et_ancienne_valeur,
+        et_alpha_power,
+        et_somme_y,
+        et_integrateur,
+        et_fin_p
+    );
+    
     signal mef_EtatCourant, mef_EtatProchain: mef_etat;
+    signal mef_EtatCourant_p, mef_EtatProchain_p: mef_etat_p;
     signal noise, p2_counter: integer range 0 to 1000 := 0;
     signal en_compteur, first_received, signe_initial : std_logic := '0';
-    signal prec_ech : std_logic_vector (23 downto 0);
-    signal greater_ech : std_logic_vector (23 downto 0);
+    signal prec_ech : std_logic_vector (23 downto 0) := (others => '0');
+    signal greater_ech : std_logic_vector (23 downto 0) := (others => '0');
+    signal greater_ech_tmp : std_logic_vector (23 downto 0) := (others => '0');
+    signal sum : std_logic_vector (23 downto 0);
     
     constant NOISE_TOLERANCE : integer := 1;
 ---------------------------------------------------------------------------------------------
@@ -68,49 +88,73 @@ begin
     process (i_bclk, i_reset)
     begin
         if (i_reset = '1') then
-            alpha_y <= "00000000";
-        elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
-            alpha_power_1(12) <=  alpha_y(7);
-            alpha_power_2(12) <=  alpha_y(7);
-            alpha_power_3(12) <=  alpha_y(7);
-            alpha_power_4(12) <=  alpha_y(7);
-            alpha_power_5(12) <=  alpha_y(7);
-            alpha_power_1(10 downto 4) <= alpha_y(6 downto 0);
-            alpha_power_2(9 downto 3) <= alpha_y(6 downto 0);
-            alpha_power_3(8 downto 2) <= alpha_y(6 downto 0);
-            alpha_power_4(7 downto 1) <= alpha_y(6 downto 0);
-            alpha_power_5(6 downto 0) <= alpha_y(6 downto 0);
-            alpha_sum <= alpha_power_1 + alpha_power_2 + alpha_power_3 + alpha_power_4 + alpha_power_5;
-           -- alpha_y <= alpha_y(12 downto 5);
-            
-        end if;
-    end process;
-
-    
-    process (i_bclk, i_reset)
-    begin
-        if (i_reset = '1') then
---            -- reset le enable du compteur
---            en_compteur <= '0';
---            -- reset le compteur
---            p2_counter <= 0;
---            -- reset le first_receive égale �  0
---            first_received <= '0';
-            mef_EtatCourant <= et_att;
+            mef_EtatCourant <= et_init;
+            mef_EtatCourant_p <= et_init_p;
         elsif ((rising_edge(i_bclk)) and (i_en = '1')) then
             mef_EtatCourant <= mef_EtatProchain;
---            if (en_compteur = '1') then
---                p2_counter <= p2_counter + 1;
---            else
---                p2_counter <= 0;
---            end if;
-        end if;
+            mef_EtatCourant_p <= mef_EtatProchain_p;
+        end if;      
     end process;
+    
+    
+    process(mef_EtatCourant_p)
+    begin
+        case(mef_EtatCourant_p) is
+            when et_init_p =>
+                mef_EtatProchain_p <= et_ancienne_valeur;
+            when et_ancienne_valeur =>
+                mef_EtatProchain_p <= et_alpha_power;
+            when et_alpha_power =>
+                mef_EtatProchain_p <= et_somme_y;
+            when et_somme_y =>
+                mef_EtatProchain_p <= et_integrateur;
+            when et_integrateur =>
+                mef_EtatProchain_p <= et_fin_p;
+            when et_fin_p =>
+                mef_EtatProchain_p <= et_ancienne_valeur;
+            when others =>
+        end case;
+    end process;
+    
+    
+    process(mef_EtatCourant_p)
+    begin        
+        case(mef_EtatCourant_p) is
+            when et_init_p =>
+                integrateur <= (others => '0');
+            when et_ancienne_valeur =>
+                integrateur_y <= integrateur;
+            when et_alpha_power =>
+                alpha_power_1(28) <=  integrateur_y(23);
+                alpha_power_2(28) <=  integrateur_y(23);
+                alpha_power_3(28) <=  integrateur_y(23);
+                alpha_power_4(28) <=  integrateur_y(23);
+                alpha_power_5(28) <=  integrateur_y(23);
+                alpha_power_1(27 downto 4) <= integrateur_y;
+                alpha_power_2(26 downto 3) <= integrateur_y;
+                alpha_power_3(25 downto 2) <= integrateur_y;
+                alpha_power_4(24 downto 1) <= integrateur_y;
+                alpha_power_5(23 downto 0) <= integrateur_y;
+            when et_somme_y =>
+                alpha_sum <= alpha_power_1 + alpha_power_2 + alpha_power_3 + alpha_power_4 + alpha_power_5;
+            when et_integrateur =>
+                integrateur <= alpha_sum(28 downto 5) + integrateur + greater_ech;
+            when et_fin_p =>
+                o_param <= integrateur(23 downto 16);
+            when others =>
+        end case;
+    end process;
+    
+    
     
     process(mef_EtatCourant, i_ech)
     begin
         mef_EtatProchain <= mef_EtatCourant;
         case(mef_EtatCourant) is
+           when et_init =>
+                greater_ech <= (others => '0');
+                prec_ech <= (others => '0');
+                mef_EtatProchain <= et_att;
             when et_att =>
                     if (i_ech > prec_ech) then -- prec_ech est 0 dans ce cas
                         -- incremente
@@ -121,7 +165,7 @@ begin
                             noise <= 0;
                         end if;   
                      end if;
-            when et_cmp =>                
+            when et_cmp =>  
                 if(i_ech < prec_ech) then
                     -- decremente
                     noise <= noise + 1;
@@ -135,9 +179,10 @@ begin
                     noise <= 0;
                 end if;            
             when et_fin =>
-                mef_EtatProchain <= et_att;
+                mef_EtatProchain <= et_init;
+--                o_param <= -- calcule
             when others =>
-                first_received <= '0';
+
         end case;
     end process;
     
@@ -145,20 +190,19 @@ begin
     begin
         case(mef_EtatCourant) is
             when et_att =>                
-                greater_ech <= "000000000000000000000000";
-                prec_ech <= "000000000000000000000000"; 
+--                greater_ech <= "000000000000000000000000";
+--                prec_ech <= "000000000000000000000000"; 
 
             when et_cmp =>            
                 -- noise <= 0;
             when et_fin =>
-                -- reset le first_receive égale �  0
-                first_received <= '0';
-                -- calcul du facteur d'oublie
-                o_param <= std_logic_vector(to_unsigned(p2_counter, 8));
 
-                prec_ech <= "000000000000000000000000"; 
-            when others =>
-                first_received <= '0';
+                -- calcul du facteur d'oublie
+--                o_param <= std_logic_vector(to_unsigned(p2_counter, 8));
+
+--                prec_ech <= "000000000000000000000000"; 
+             when others =>
+                
         end case;
     end process;
         

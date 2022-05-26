@@ -68,16 +68,6 @@ component calcul_param_2 is
 end component;
 
 
---component calcul_param_2 is
---    Port (
---    i_bclk    : in   std_logic;   -- bit clock
---    i_reset   : in   std_logic;
---    i_en      : in   std_logic;   -- un echantillon present
---    i_ech     : in   std_logic_vector (23 downto 0);
---    o_param   : out  std_logic_vector (7 downto 0)                                     
---    );
---end component;
-
 impure function nextInput return std_logic_vector is 
 variable iline : line;
 variable data: std_logic_vector(23 downto 0);
