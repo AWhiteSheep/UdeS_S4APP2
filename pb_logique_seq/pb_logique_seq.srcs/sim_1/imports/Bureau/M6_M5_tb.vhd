@@ -42,7 +42,7 @@ architecture Behavioral of M6_M5_tb is
 
 file inputFile : text;
 --Chemin depuis le fichier de simulation les fichiers se trouvent � la racine du projet
-constant inputFileName : string := "../../../../SignalHexa_200Hz_noise.txt";
+constant inputFileName : string := "../../../../SignalHexa_200Hz.txt";
 
 shared variable fstatus : file_open_status := NAME_ERROR;
 
@@ -53,6 +53,17 @@ component calcul_param_1 is
     i_en      : in   std_logic; -- un echantillon present a l'entr�e
     i_ech     : in   std_logic_vector (23 downto 0); -- echantillon en entr�e
     o_param   : out  std_logic_vector (7 downto 0)   -- param�tre calcul�
+    );
+end component;
+
+
+component calcul_param_2 is
+    Port (
+    i_bclk    : in   std_logic;   -- bit clock
+    i_reset   : in   std_logic;
+    i_en      : in   std_logic;   -- un echantillon present
+    i_ech     : in   std_logic_vector (23 downto 0);
+    o_param   : out  std_logic_vector (7 downto 0)                                     
     );
 end component;
 
@@ -102,7 +113,7 @@ end nextInput;
     signal s_reset   : std_logic;
     signal compt_gen_R, compt_gen_L  : unsigned(7 downto 0) := x"00";
     
-    signal param_result  : std_logic_vector (7 downto 0);
+    signal param_result, param2_result  : std_logic_vector (7 downto 0);
     signal sim_en  : std_logic := '0';
     
     constant c_mclk_Period       : time :=  80.715 ns;  -- 12.288 MHz
@@ -117,6 +128,15 @@ begin
         i_en     => sim_en, 
         i_ech    => d_val_ech,
         o_param  => param_result
+    );
+    
+    UUT_M6 : calcul_param_2
+    Port map (
+    i_bclk    => d_ac_bclk,   -- bit clock
+    i_reset   => s_reset,
+    i_en      => sim_en,   -- un echantillon present
+    i_ech     => d_val_ech,
+    o_param  => param2_result                                    
     );
     
    
